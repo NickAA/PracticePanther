@@ -150,32 +150,38 @@ namespace PracticePanther
                     case "D":
                     case "d":
                         // Delete client
-                        Console.WriteLine("Enter client Id that you want to remove.");
-                        clients.ForEach(Console.WriteLine);
-                        int IdToDelete = int.Parse(Console.ReadLine() ?? "-1");
-                        while (IdToDelete == -1 || !clients.Exists(s => s.Id == IdToDelete))
+                        if (clients.Count > 0)
                         {
-                            Console.WriteLine("Please enter a valid Id associated with a Client.");
-                            IdToDelete = int.Parse(Console.ReadLine() ?? "-1");
-                        }
+                            Console.WriteLine("Enter client Id that you want to remove.");
+                            clients.ForEach(Console.WriteLine);
+                            int IdToDelete = int.Parse(Console.ReadLine() ?? "-1");
+                            while (IdToDelete == -1 || !clients.Exists(s => s.Id == IdToDelete))
+                            {
+                                Console.WriteLine("Please enter a valid Id associated with a Client.");
+                                IdToDelete = int.Parse(Console.ReadLine() ?? "-1");
+                            }
 
-                        var ClientToDelete = clients.FirstOrDefault(c => c.Id == IdToDelete);
-                        /*
-                        foreach (Client Current in clients)
-                        {
-                            if (Current.Id > )
-                            Current.Id--;
-                        }
-                        If I feel like making the id's not skip any numbers*/
+                            var ClientToDelete = clients.FirstOrDefault(c => c.Id == IdToDelete);
+                            /*
+                            foreach (Client Current in clients)
+                            {
+                                if (Current.Id > )
+                                Current.Id--;
+                            }
+                            If I feel like making the id's not skip any numbers*/
 
-                        if (projects.Exists(c => c.ClientId == ClientToDelete.Id))
-                        {
-                            var RemoveClint = projects.FirstOrDefault(c => c.ClientId == ClientToDelete.Id);
-                            RemoveClint.ClientId = -1;
-                        }
+                            if (projects.Exists(c => c.ClientId == ClientToDelete.Id))
+                            {
+                                var RemoveClint = projects.FirstOrDefault(c => c.ClientId == ClientToDelete.Id);
+                                RemoveClint.ClientId = -1;
+                            }
 
-                        clients.Remove(ClientToDelete);
-                        Console.WriteLine("Successfully deleted client.");
+                            clients.Remove(ClientToDelete);
+                            Console.WriteLine("Successfully deleted client.");
+                        }
+                        else
+                            Console.WriteLine("No Clients to delete from.");
+
                         break;
                     case "Q":
                     case "q":
@@ -270,6 +276,7 @@ namespace PracticePanther
                         Input = Console.ReadLine() ?? "n";
                         if (Input.Equals("Y", StringComparison.CurrentCultureIgnoreCase) || Input.Equals("Yes", StringComparison.CurrentCultureIgnoreCase))
                         {
+                            string strFormat = String.Format("\n{0,-5} {1, -18} {2}", "ID", "Client", "Activity");
                             clients.ForEach(Console.WriteLine);
                             Console.Write("Enter client Id to link with project: ");
                             ProjectToUpdate.ClientId = int.Parse(Console.ReadLine() ?? "-1");
@@ -313,18 +320,25 @@ namespace PracticePanther
                     case "D":
                     case "d":
                         // Delete Project
-                        Console.WriteLine("Enter project Id that you want to delete.");
-                        projects.ForEach(Console.WriteLine);
-                        int IdToDelete = int.Parse(Console.ReadLine() ?? "-1");
-                        while (IdToDelete == -1 || !projects.Exists(s => s.Id == IdToDelete))
-                        {
-                            Console.WriteLine("Please enter a valid Id associated with a Client.");
-                            IdToDelete = int.Parse(Console.ReadLine() ?? "-1");
-                        }
 
-                        var ProjectToDelete = projects.FirstOrDefault(c => c.Id == IdToDelete);
-                        Console.WriteLine($"Successfully deleted {ProjectToDelete.Name}.");
-                        projects.Remove(ProjectToDelete);
+                        if (projects.Count > 0)
+                        {
+                            Console.WriteLine(String.Format("{0,-5} {1, -18} {2, -18} {3}", "ID", "Project", "Client Ids", "Activity"));
+                            Console.WriteLine("Enter project Id that you want to delete.");
+                            projects.ForEach(Console.WriteLine);
+                            int IdToDelete = int.Parse(Console.ReadLine() ?? "-1");
+                            while (IdToDelete == -1 || !projects.Exists(s => s.Id == IdToDelete))
+                            {
+                                Console.WriteLine("Please enter a valid Id associated with a Client.");
+                                IdToDelete = int.Parse(Console.ReadLine() ?? "-1");
+                            }
+
+                            var ProjectToDelete = projects.FirstOrDefault(c => c.Id == IdToDelete);
+                            Console.WriteLine($"Successfully deleted {ProjectToDelete.Name}.");
+                            projects.Remove(ProjectToDelete);
+                        }
+                        else
+                            Console.WriteLine("No projects to delete from.");
                         break;
                     case "Q":
                     case "q":
