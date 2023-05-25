@@ -19,6 +19,7 @@ namespace PracticePanther
             string Selection;
             do
             {
+                // Menu
                 Console.WriteLine("Main Menu\n");
                 Console.WriteLine("C. Client Menu\nP. Project Menu\nQ. Quit Program");
 
@@ -64,6 +65,7 @@ namespace PracticePanther
                 {
                     case "C":
                     case "c":
+                        // Creates new client
                         clients.Add(new Client());
 
                         Console.Write("Please enter name of Client: ");
@@ -94,7 +96,7 @@ namespace PracticePanther
 
                     case "U":
                     case "u":
-                        // To update Client (Most fix as it's ineffective)
+                        // To update Client
                         Console.WriteLine("\nEnter Client Id to update a Client.\n");
                         string NewFormat = String.Format("{0,-5} {1, -18} {2}", "ID", "Client", "Activity");
                         Console.WriteLine($"\n{NewFormat}");
@@ -147,7 +149,8 @@ namespace PracticePanther
 
                     case "D":
                     case "d":
-                        Console.WriteLine("Which client do you want to delete?");
+                        // Delete client
+                        Console.WriteLine("Enter client Id that you want to remove.");
                         clients.ForEach(Console.WriteLine);
                         int IdToDelete = int.Parse(Console.ReadLine() ?? "-1");
                         while (IdToDelete == -1 || !clients.Exists(s => s.Id == IdToDelete))
@@ -176,6 +179,7 @@ namespace PracticePanther
                         break;
                     case "Q":
                     case "q":
+                        // Quit Menu
                         break;
 
                     default:
@@ -211,6 +215,7 @@ namespace PracticePanther
                 {
                     case "C":
                     case "c":
+                        // Add new Project
                         projects.Add(new Project());
 
                         Console.Write("Please enter name of Project: ");
@@ -226,7 +231,7 @@ namespace PracticePanther
 
                     case "S":
                     case "s":
-                        // Prints out clients in directory
+                        // Prints out projects in directory
                         if (projects.Count == 0)
                         {
                             Console.WriteLine("\nNo storred projects ");
@@ -284,7 +289,7 @@ namespace PracticePanther
                             ProjectToUpdate.Notes = Console.ReadLine() ?? ProjectToUpdate.Notes;
                         }
 
-                        Console.WriteLine("Entering Close date?");          // Entering Close date
+                        Console.WriteLine("Entering Close date?");          // Entering Close date, IsActive is now false
                         Input = Console.ReadLine() ?? "n";
                         if (Input.Equals("Y", StringComparison.CurrentCultureIgnoreCase) || Input.Equals("Yes", StringComparison.CurrentCultureIgnoreCase))
                         {
@@ -307,6 +312,7 @@ namespace PracticePanther
 
                     case "D":
                     case "d":
+                        // Delete Project
                         Console.WriteLine("Enter project Id that you want to delete.");
                         projects.ForEach(Console.WriteLine);
                         int IdToDelete = int.Parse(Console.ReadLine() ?? "-1");
