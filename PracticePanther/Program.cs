@@ -276,7 +276,7 @@ namespace PracticePanther
                         Input = Console.ReadLine() ?? "n";
                         if (Input.Equals("Y", StringComparison.CurrentCultureIgnoreCase) || Input.Equals("Yes", StringComparison.CurrentCultureIgnoreCase))
                         {
-                            string strFormat = String.Format("\n{0,-5} {1, -18} {2}", "ID", "Client", "Activity");
+                            Console.WriteLine(String.Format("\n{0,-5} {1, -18} {2}", "ID", "Client", "Activity"));
                             clients.ForEach(Console.WriteLine);
                             Console.Write("Enter client Id to link with project: ");
                             ProjectToUpdate.ClientId = int.Parse(Console.ReadLine() ?? "-1");
