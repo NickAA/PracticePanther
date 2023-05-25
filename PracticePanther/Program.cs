@@ -95,7 +95,9 @@ namespace PracticePanther
                     case "U":
                     case "u":
                         // To update Client (Most fix as it's ineffective)
-                        Console.WriteLine("Which client do you want to update?");
+                        Console.WriteLine("\nEnter Client Id to update a Client.\n");
+                        string NewFormat = String.Format("{0,-5} {1, -18} {2}", "ID", "Client", "Activity");
+                        Console.WriteLine($"\n{NewFormat}");
                         clients.ForEach(Console.WriteLine);
                         int IdToUpdate = int.Parse(Console.ReadLine() ?? "-1");
                         while (IdToUpdate == -1 || !clients.Exists(s => s.Id == IdToUpdate))
@@ -240,7 +242,7 @@ namespace PracticePanther
                     case "U":
                     case "u":
                         // To update project (FIXED)
-                        Console.WriteLine("Which project do you want to update?");
+                        Console.WriteLine("Enter project Id that you want to update.");
                         projects.ForEach(Console.WriteLine);
                         int IdToUpdate = int.Parse(Console.ReadLine() ?? "-1");
                         while (IdToUpdate == -1 || !projects.Exists(s => s.Id == IdToUpdate))
@@ -305,7 +307,7 @@ namespace PracticePanther
 
                     case "D":
                     case "d":
-                        Console.WriteLine("Which client do you want to delete?");
+                        Console.WriteLine("Enter project Id that you want to delete.");
                         projects.ForEach(Console.WriteLine);
                         int IdToDelete = int.Parse(Console.ReadLine() ?? "-1");
                         while (IdToDelete == -1 || !projects.Exists(s => s.Id == IdToDelete))
@@ -315,8 +317,8 @@ namespace PracticePanther
                         }
 
                         var ProjectToDelete = projects.FirstOrDefault(c => c.Id == IdToDelete);
+                        Console.WriteLine($"Successfully deleted {ProjectToDelete.Name}.");
                         projects.Remove(ProjectToDelete);
-                        Console.WriteLine("Successfully deleted client.");
                         break;
                     case "Q":
                     case "q":
