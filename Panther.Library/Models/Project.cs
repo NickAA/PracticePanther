@@ -13,13 +13,14 @@ namespace PracticePanther.Models
             OpenDate = DateTime.Today;
             IsActive = true;
             Id = ++ProjectsCreated;
-            ClientId = -1;
         }
 
         public int Id { get; set; }
         static private int ProjectsCreated = 0;
 
-        public int ClientId { get; set; }          // Used to Link Clients to a project
+        public List<int> ClientId { get; set; }          // Used to Link Clients to a project
+
+        public List<Client> Clients { get; set; }
 
         public DateTime OpenDate { get; set; }
         public DateTime CloseDate { get; set; }
@@ -31,17 +32,20 @@ namespace PracticePanther.Models
 
         public override string ToString()
         {
-            string Active, Client;
+            string Active = "Inactive", Client = "None";
 
             if (IsActive)
                 Active = "Active";
-            else
-                Active = "Inactive";
 
-            if (ClientId == -1)
-                Client = "None";
-            else
-                Client = ClientId.ToString();
+            if (!ClientId.Count.Equals(0))
+                for (int i = 0; i < ClientId.Count; i++)
+                {
+                    if (i == 0)
+                        Client = ClientId[0].ToString();
+                    else
+                        Client += $" {ClientId[i].ToString()}";
+                }
+
 
             string strFormat = String.Format("{0,-5} {1, -18} {2, -18} {3}", Id, Name, Client, Active);
             return $"{strFormat}";
