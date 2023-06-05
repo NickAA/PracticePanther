@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33712.159
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticePanther", "PracticePanther\PracticePanther.csproj", "{EBECE846-8BCE-4916-9ACE-2BD392535DFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PracticePanther", "PracticePanther\PracticePanther.csproj", "{EBECE846-8BCE-4916-9ACE-2BD392535DFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Panther.Library", "Panther.Library\Panther.Library.csproj", "{5C8EABB8-97D2-4B4B-AF11-5D966E4CB55B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{EBECE846-8BCE-4916-9ACE-2BD392535DFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBECE846-8BCE-4916-9ACE-2BD392535DFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBECE846-8BCE-4916-9ACE-2BD392535DFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C8EABB8-97D2-4B4B-AF11-5D966E4CB55B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C8EABB8-97D2-4B4B-AF11-5D966E4CB55B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C8EABB8-97D2-4B4B-AF11-5D966E4CB55B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C8EABB8-97D2-4B4B-AF11-5D966E4CB55B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

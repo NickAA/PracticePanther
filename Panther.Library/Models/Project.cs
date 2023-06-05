@@ -18,6 +18,7 @@ namespace PracticePanther.Models
 
         public int Id { get; set; }
         static private int ProjectsCreated = 0;
+
         public int ClientId { get; set; }          // Used to Link Clients to a project
 
         public DateTime OpenDate { get; set; }
