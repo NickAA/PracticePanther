@@ -1,4 +1,5 @@
-﻿using PracticePanther.Models;
+﻿using Panther.Library.Services;
+using PracticePanther.Models;
 using System;
 using System.ComponentModel.Design;
 
@@ -13,7 +14,6 @@ namespace PracticePanther
             Console.WriteLine("Below a Menu will show with options to choose from.\n");
 
             // List of clients and projects
-            List<Client> clients = new List<Client>();
             List<Project> projects = new List<Project>();
 
             string Selection;
@@ -32,7 +32,7 @@ namespace PracticePanther
                 }
 
                 if (Selection.Equals("C", StringComparison.CurrentCultureIgnoreCase))
-                    ClientMenu(projects, clients);
+                    ClientMenu(projects);
                 else if (Selection.Equals("P", StringComparison.CurrentCultureIgnoreCase))
                     ProjectMenu(projects, clients);
 
@@ -44,8 +44,10 @@ namespace PracticePanther
 
 
 
-        static void ClientMenu(List<Project> projects, List<Client> clients)
+        static void ClientMenu(List<Project> projects)
         {
+            var myClientServices = ClientService.Current;
+
             string Selection;
             do
             {
