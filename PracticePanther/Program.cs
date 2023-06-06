@@ -155,7 +155,7 @@ namespace PracticePanther
                             Console.WriteLine("Enter client Id that you want to remove.");
                             clients.ForEach(Console.WriteLine);
                             int IdToDelete = int.Parse(Console.ReadLine() ?? "-1");
-                            while (IdToDelete == -1 || !clients.Exists(s => s.Id == IdToDelete))
+                            while (!clients.Exists(s => s.Id == IdToDelete))
                             {
                                 Console.WriteLine("Please enter a valid Id associated with a Client.");
                                 IdToDelete = int.Parse(Console.ReadLine() ?? "-1");
@@ -170,10 +170,10 @@ namespace PracticePanther
                             }
                             If I feel like making the id's not skip any numbers*/
 
-                            if (projects.Exists(c => c.ClientId == ClientToDelete.Id))
+                            if (projects.Exists(c => c.Clients.Exists(s => s.Id == ClientToDelete.Id)))
                             {
-                                var RemoveClint = projects.FirstOrDefault(c => c.ClientId == ClientToDelete.Id);
-                                RemoveClint.ClientId = -1;
+                                var RemoveClint = projects.FirstOrDefault(c => c.Clients.FirstOrDefault(s => s.Id == ClientToDelete.Id) == ClientToDelete);
+                                RemoveClint.Clients.Remove(ClientToDelete);
                             }
 
                             clients.Remove(ClientToDelete);
@@ -258,7 +258,7 @@ namespace PracticePanther
                         int IdToUpdate = int.Parse(Console.ReadLine() ?? "-1");
                         while (IdToUpdate == -1 || !projects.Exists(s => s.Id == IdToUpdate))
                         {
-                            Console.WriteLine("Please enter a valid Id associated with a Client.");
+                            Console.WriteLine("Please enter a valid Id associated with a Project.");
                             IdToUpdate = int.Parse(Console.ReadLine() ?? "-1");
                         }
 
@@ -279,13 +279,15 @@ namespace PracticePanther
                             Console.WriteLine(String.Format("\n{0,-5} {1, -18} {2}", "ID", "Client", "Activity"));
                             clients.ForEach(Console.WriteLine);
                             Console.Write("Enter client Id to link with project: ");
-                            ProjectToUpdate.ClientId = int.Parse(Console.ReadLine() ?? "-1");
+                            ProjectToUpdate.ClientId.Add(int.Parse(Console.ReadLine() ?? "-1"));
 
-                            while (ProjectToUpdate.ClientId == -1 || !clients.Exists(s => s.Id == ProjectToUpdate.ClientId))
+                            while (!clients.Exists(s => s.Id == ProjectToUpdate.ClientId[ ProjectToUpdate.ClientId.Count - 1]))
                             {
                                 Console.Write("Please enter a valid client Id: ");
-                                ProjectToUpdate.ClientId = int.Parse(Console.ReadLine() ?? "-1");
+                                ProjectToUpdate.ClientId[ProjectToUpdate.ClientId.Last() - 1] = int.Parse(Console.ReadLine() ?? "-1");
                             }
+
+                            ProjectToUpdate.Clients.Add(clients.Find(c => c.Id == ProjectToUpdate.ClientId.Last()));
                         }
 
                         Console.WriteLine("Entering Notes?");               // Entering Notes

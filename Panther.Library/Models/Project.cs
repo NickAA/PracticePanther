@@ -13,6 +13,8 @@ namespace PracticePanther.Models
             OpenDate = DateTime.Today;
             IsActive = true;
             Id = ++ProjectsCreated;
+            ClientId = new List<int>();
+            Clients = new List<Client>();
         }
 
         public int Id { get; set; }
@@ -37,13 +39,13 @@ namespace PracticePanther.Models
             if (IsActive)
                 Active = "Active";
 
-            if (!ClientId.Count.Equals(0))
-                for (int i = 0; i < ClientId.Count; i++)
+            if (Clients.Count != 0)
+                for (int i = 0; i < Clients.Count; i++)
                 {
                     if (i == 0)
-                        Client = ClientId[0].ToString();
+                        Client = Clients[0].Id.ToString();
                     else
-                        Client += $" {ClientId[i].ToString()}";
+                        Client += $" {Clients[i].Id.ToString()}";
                 }
 
 
