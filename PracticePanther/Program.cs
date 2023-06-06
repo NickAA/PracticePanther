@@ -279,15 +279,15 @@ namespace PracticePanther
                             Console.WriteLine(String.Format("\n{0,-5} {1, -18} {2}", "ID", "Client", "Activity"));
                             clients.ForEach(Console.WriteLine);
                             Console.Write("Enter client Id to link with project: ");
-                            ProjectToUpdate.ClientId.Add(int.Parse(Console.ReadLine() ?? "-1"));
-
-                            while (!clients.Exists(s => s.Id == ProjectToUpdate.ClientId[ ProjectToUpdate.ClientId.Count - 1]))
+                            int InputtedID = int.Parse(Console.ReadLine() ?? "-1");
+                            
+                            while (!clients.Exists(s => s.Id == InputtedID))
                             {
                                 Console.Write("Please enter a valid client Id: ");
-                                ProjectToUpdate.ClientId[ProjectToUpdate.ClientId.Last() - 1] = int.Parse(Console.ReadLine() ?? "-1");
+                                InputtedID = int.Parse(Console.ReadLine() ?? "-1");
                             }
 
-                            ProjectToUpdate.Clients.Add(clients.Find(c => c.Id == ProjectToUpdate.ClientId.Last()));
+                            ProjectToUpdate.Clients.Add(clients.Find(c => c.Id == InputtedID));
                         }
 
                         Console.WriteLine("Entering Notes?");               // Entering Notes
@@ -331,7 +331,7 @@ namespace PracticePanther
                             int IdToDelete = int.Parse(Console.ReadLine() ?? "-1");
                             while (IdToDelete == -1 || !projects.Exists(s => s.Id == IdToDelete))
                             {
-                                Console.WriteLine("Please enter a valid Id associated with a Client.");
+                                Console.WriteLine("Please enter a valid Id associated with a Project.");
                                 IdToDelete = int.Parse(Console.ReadLine() ?? "-1");
                             }
 

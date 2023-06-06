@@ -13,14 +13,11 @@ namespace PracticePanther.Models
             OpenDate = DateTime.Today;
             IsActive = true;
             Id = ++ProjectsCreated;
-            ClientId = new List<int>();
             Clients = new List<Client>();
         }
 
         public int Id { get; set; }
         static private int ProjectsCreated = 0;
-
-        public List<int> ClientId { get; set; }          // Used to Link Clients to a project
 
         public List<Client> Clients { get; set; }
 
