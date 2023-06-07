@@ -227,23 +227,17 @@ namespace PracticePanther
                     case "C":
                     case "c":
                         // Add new Project
-                        projects.Add(new Project());
-
                         Console.Write("Please enter name of Project: ");
-                        projects[projects.Count - 1].Name = Console.ReadLine() ?? string.Empty;
-                        while (projects[projects.Count - 1].Name == string.Empty)
-                        {
+                        while (!myProjectServices.AddProject(Console.ReadLine() ?? string.Empty))
                             Console.Write("Please enter a valid project name: ");
-                            projects[projects.Count - 1].Name = Console.ReadLine() ?? string.Empty;
-                        }
 
-                        Console.WriteLine($"Succesfully entered {projects[projects.Count - 1].Name} project into the system.");
+                        Console.WriteLine($"Succesfully entered {myProjectServices.LastProject().Name} project into the system.");
                         break;
 
                     case "S":
                     case "s":
                         // Prints out projects in directory
-                        if (projects.Count == 0)
+                        if (myProjectServices.Count() == 0)
                         {
                             Console.WriteLine("\nNo storred projects ");
                         }
@@ -251,7 +245,7 @@ namespace PracticePanther
                         {
                             string strFormat = String.Format("{0,-5} {1, -18} {2, -18} {3}", "ID", "Project", "Client Ids", "Activity");
                             Console.WriteLine($"\n{strFormat}");
-                            projects.ForEach(Console.WriteLine);
+                            myProjectServices.PrintProjects();
                         }
                         break;
 
@@ -259,9 +253,9 @@ namespace PracticePanther
                     case "u":
                         // To update project (FIXED)
                         Console.WriteLine("Enter project Id that you want to update.");
-                        projects.ForEach(Console.WriteLine);
+                        myProjectServices.PrintProjects();
                         int IdToUpdate = int.Parse(Console.ReadLine() ?? "-1");
-                        while (IdToUpdate == -1 || !projects.Exists(s => s.Id == IdToUpdate))
+                        while (IdToUpdate == -1 || !myProjectServices.Exists(IdToUpdate))
                         {
                             Console.WriteLine("Please enter a valid Id associated with a Project.");
                             IdToUpdate = int.Parse(Console.ReadLine() ?? "-1");

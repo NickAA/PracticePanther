@@ -44,31 +44,20 @@ namespace Panther.Library.Services
         }
 
         public Client LastClient()
-        {
-            return clients.Last();
-        }
+        { return clients.Last(); }
 
         public int AmountofClients()
         { return clients.Count; }
 
         public void PrintClients()
-        {
-            clients.ForEach(Console.WriteLine);
-        }
+        { clients.ForEach(Console.WriteLine); }
 
         public bool ClientExist(int ID)
-        {
-            return clients.Exists(c => c.Id == ID);
-        }
+        { return clients.Exists(c => c.Id == ID); }
         public Client? FindClient(int ID)
-        {
-            return clients.FirstOrDefault(c => c.Id == ID);
-        }
+        { return clients.FirstOrDefault(c => c.Id == ID); }
 
-        private ClientService()
-        {
-            clients = new List<Client>();
-        }
+        private ClientService() { }
 
         
     }
