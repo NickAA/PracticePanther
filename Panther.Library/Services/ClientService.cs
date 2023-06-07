@@ -9,7 +9,7 @@ namespace Panther.Library.Services
 {
     public class ClientService
     {
-        public List<Client> clients;
+        public List<Client> clients = new List<Client>();
         private static ClientService? instance;
         private static object _lock = new object();
 

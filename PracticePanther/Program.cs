@@ -14,11 +14,13 @@ namespace PracticePanther
             Console.WriteLine("Below a Menu will show with options to choose from.\n");
 
             // List of clients and projects
-            List<Project> projects = new List<Project>();
+            var myProjectService = ProjectService.Current;
+            var myClientServices = ClientService.Current;
 
             string Selection;
             do
             {
+
                 // Menu
                 Console.WriteLine("Main Menu\n");
                 Console.WriteLine("C. Client Menu\nP. Project Menu\nQ. Quit Program");
@@ -32,9 +34,9 @@ namespace PracticePanther
                 }
 
                 if (Selection.Equals("C", StringComparison.CurrentCultureIgnoreCase))
-                    ClientMenu(projects);
+                    ClientMenu();
                 else if (Selection.Equals("P", StringComparison.CurrentCultureIgnoreCase))
-                    ProjectMenu(projects, clients);
+                    ProjectMenu();
 
 
 
@@ -44,7 +46,7 @@ namespace PracticePanther
 
 
 
-        static void ClientMenu(List<Project> projects)
+        static void ClientMenu()
         {
             var myClientServices = ClientService.Current;
 
@@ -171,11 +173,12 @@ namespace PracticePanther
                             // Work on removing client and if client is in a project remove it from project singleton
                             if (projects.Exists(c => c.Clients.Exists(s => s.Id == ClientToDelete.Id)))
                             {
+                                // returns project and uses that to get the client within project MUST FIX WITH SINGLETON
                                 var RemoveClint = projects.FirstOrDefault(c => c.Clients.FirstOrDefault(s => s.Id == ClientToDelete.Id) == ClientToDelete);
                                 RemoveClint.Clients.Remove(ClientToDelete);
                             }
 
-                            clients.Remove(ClientToDelete);
+                            myClientServices.RemoveClient(ClientToDelete);
                             Console.WriteLine("Successfully deleted client.");
                         }
                         else
@@ -199,8 +202,11 @@ namespace PracticePanther
             Console.Clear();
         }
 
-        static void ProjectMenu(List<Project> projects, List<Client> clients)
+        static void ProjectMenu()
         {
+            var myProjectServices = ProjectService.Current;
+            var myClientServices = ClientService.Current;
+
             string Selection;
             do
             {
@@ -276,11 +282,11 @@ namespace PracticePanther
                         if (Input.Equals("Y", StringComparison.CurrentCultureIgnoreCase) || Input.Equals("Yes", StringComparison.CurrentCultureIgnoreCase))
                         {
                             Console.WriteLine(String.Format("\n{0,-5} {1, -18} {2}", "ID", "Client", "Activity"));
-                            clients.ForEach(Console.WriteLine);
+                            myClientServices.PrintClients();
                             Console.Write("Enter client Id to link with project: ");
                             int InputtedID = int.Parse(Console.ReadLine() ?? "-1");
                             
-                            while (!clients.Exists(s => s.Id == InputtedID))
+                            while (!myClientServices.ClientExist(InputtedID))
                             {
                                 Console.Write("Please enter a valid client Id: ");
                                 InputtedID = int.Parse(Console.ReadLine() ?? "-1");
