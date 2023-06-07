@@ -68,23 +68,19 @@ namespace PracticePanther
                     case "C":
                     case "c":
                         // Creates new client
-                        clients.Add(new Client());
-
+                        
                         Console.Write("Please enter name of Client: ");
-                        clients[clients.Count - 1].Name = Console.ReadLine() ?? string.Empty;
-                        while (clients[clients.Count - 1].Name == string.Empty)
-                        { 
-                            Console.Write("Please enter a valid name: ");
-                            clients[clients.Count - 1].Name = Console.ReadLine() ?? string.Empty;
-                        }
 
-                        Console.WriteLine($"Succesfully entered {clients[clients.Count - 1].Name} into the system.");
+                        while (!myClientServices.AddClient(Console.ReadLine() ?? string.Empty))
+                            Console.Write("Please enter a valid name: ");
+
+                        Console.WriteLine($"Succesfully entered {myClientServices.LastClient().Name} into the system.");
                         break;
 
                     case "S":
                     case "s":
                         // Prints out clients in directory
-                        if (clients.Count == 0)
+                        if (myClientServices.AmountofClients() == 0)
                         {
                             Console.WriteLine("\nNo storred clients ");
                         }
@@ -92,7 +88,7 @@ namespace PracticePanther
                         {
                             string strFormat = String.Format("{0,-5} {1, -18} {2}", "ID", "Client", "Activity");
                             Console.WriteLine($"\n{strFormat}");
-                            clients.ForEach(Console.WriteLine);
+                            myClientServices.PrintClients();
                         }
                         break;
 
@@ -102,15 +98,15 @@ namespace PracticePanther
                         Console.WriteLine("\nEnter Client Id to update a Client.\n");
                         string NewFormat = String.Format("{0,-5} {1, -18} {2}", "ID", "Client", "Activity");
                         Console.WriteLine($"\n{NewFormat}");
-                        clients.ForEach(Console.WriteLine);
+                        myClientServices.PrintClients();
                         int IdToUpdate = int.Parse(Console.ReadLine() ?? "-1");
-                        while (IdToUpdate == -1 || !clients.Exists(s => s.Id == IdToUpdate))
+                        while (IdToUpdate == -1 || !myClientServices.ClientExist(IdToUpdate))
                         {
                             Console.WriteLine("Please enter a valid Id associated with a Client.");
                             IdToUpdate = int.Parse(Console.ReadLine() ?? "-1");
                         }
 
-                        var ClientToUpdate = clients.FirstOrDefault(c => c.Id == IdToUpdate);
+                        var ClientToUpdate = myClientServices.FindClient(IdToUpdate);
 
                         Console.WriteLine("Changing Name?");        // Update Name
                         var Input = Console.ReadLine();
@@ -152,18 +148,18 @@ namespace PracticePanther
                     case "D":
                     case "d":
                         // Delete client
-                        if (clients.Count > 0)
+                        if (myClientServices.AmountofClients() > 0)
                         {
                             Console.WriteLine("Enter client Id that you want to remove.");
-                            clients.ForEach(Console.WriteLine);
+                            myClientServices.PrintClients();
                             int IdToDelete = int.Parse(Console.ReadLine() ?? "-1");
-                            while (!clients.Exists(s => s.Id == IdToDelete))
+                            while (!myClientServices.ClientExist(IdToDelete))
                             {
                                 Console.WriteLine("Please enter a valid Id associated with a Client.");
                                 IdToDelete = int.Parse(Console.ReadLine() ?? "-1");
                             }
 
-                            var ClientToDelete = clients.FirstOrDefault(c => c.Id == IdToDelete);
+                            var ClientToDelete = myClientServices.FindClient(IdToDelete);
                             /*
                             foreach (Client Current in clients)
                             {
@@ -172,6 +168,7 @@ namespace PracticePanther
                             }
                             If I feel like making the id's not skip any numbers*/
 
+                            // Work on removing client and if client is in a project remove it from project singleton
                             if (projects.Exists(c => c.Clients.Exists(s => s.Id == ClientToDelete.Id)))
                             {
                                 var RemoveClint = projects.FirstOrDefault(c => c.Clients.FirstOrDefault(s => s.Id == ClientToDelete.Id) == ClientToDelete);
