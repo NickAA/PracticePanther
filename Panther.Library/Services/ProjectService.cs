@@ -49,7 +49,27 @@ namespace Panther.Library.Services
         public void PrintProjects()
         { projects.ForEach(Console.WriteLine); }
 
+        public Project FindProject(int Id)
+        { return projects.FirstOrDefault(c => c.Id == Id); }
 
+        public int AmountofProjects()
+        { return projects.Count(); }
+
+        public void RemoveProject(Project DeleteProject)
+        { projects.Remove(DeleteProject); }
+
+        public void LinkClient(Project project, int Id)
+        {
+            var myClientService = ClientService.Current;
+            var Client = myClientService.FindClient(Id);
+            project.Clients.Add(Client);
+        }
+
+        public void RemoveClient(Client client)
+        {
+            var ProjectwithClient = projects.FirstOrDefault(c => c.Clients.FirstOrDefault(s => s.Id == client.Id) == client);
+            ProjectwithClient.Clients.Remove(client);
+        }
 
         private ProjectService() { }
 

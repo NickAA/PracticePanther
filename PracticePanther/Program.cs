@@ -49,6 +49,7 @@ namespace PracticePanther
         static void ClientMenu()
         {
             var myClientServices = ClientService.Current;
+            var myProjectServices = ProjectService.Current;
 
             string Selection;
             do
@@ -171,12 +172,7 @@ namespace PracticePanther
                             If I feel like making the id's not skip any numbers*/
 
                             // Work on removing client and if client is in a project remove it from project singleton
-                            if (projects.Exists(c => c.Clients.Exists(s => s.Id == ClientToDelete.Id)))
-                            {
-                                // returns project and uses that to get the client within project MUST FIX WITH SINGLETON
-                                var RemoveClint = projects.FirstOrDefault(c => c.Clients.FirstOrDefault(s => s.Id == ClientToDelete.Id) == ClientToDelete);
-                                RemoveClint.Clients.Remove(ClientToDelete);
-                            }
+                            myProjectServices.RemoveClient(ClientToDelete);
 
                             myClientServices.RemoveClient(ClientToDelete);
                             Console.WriteLine("Successfully deleted client.");
@@ -261,7 +257,7 @@ namespace PracticePanther
                             IdToUpdate = int.Parse(Console.ReadLine() ?? "-1");
                         }
 
-                        var ProjectToUpdate = projects.FirstOrDefault(c => c.Id == IdToUpdate);
+                        var ProjectToUpdate = myProjectServices.FindProject(IdToUpdate);
 
                         Console.WriteLine("Changing Name?");                // Update project name
                         var Input = Console.ReadLine() ?? "n";
@@ -286,7 +282,7 @@ namespace PracticePanther
                                 InputtedID = int.Parse(Console.ReadLine() ?? "-1");
                             }
 
-                            ProjectToUpdate.Clients.Add(clients.Find(c => c.Id == InputtedID));
+                            myProjectServices.LinkClient(ProjectToUpdate, InputtedID);
                         }
 
                         Console.WriteLine("Entering Notes?");               // Entering Notes
@@ -322,21 +318,21 @@ namespace PracticePanther
                     case "d":
                         // Delete Project
 
-                        if (projects.Count > 0)
+                        if (myProjectServices.AmountofProjects() > 0)
                         {
                             Console.WriteLine(String.Format("{0,-5} {1, -18} {2, -18} {3}", "ID", "Project", "Client Ids", "Activity"));
                             Console.WriteLine("Enter project Id that you want to delete.");
-                            projects.ForEach(Console.WriteLine);
+                            myProjectServices.PrintProjects();
                             int IdToDelete = int.Parse(Console.ReadLine() ?? "-1");
-                            while (IdToDelete == -1 || !projects.Exists(s => s.Id == IdToDelete))
+                            while (IdToDelete == -1 || !myProjectServices.Exists(IdToDelete))
                             {
                                 Console.WriteLine("Please enter a valid Id associated with a Project.");
                                 IdToDelete = int.Parse(Console.ReadLine() ?? "-1");
                             }
 
-                            var ProjectToDelete = projects.FirstOrDefault(c => c.Id == IdToDelete);
+                            var ProjectToDelete = myProjectServices.FindProject(IdToDelete);
                             Console.WriteLine($"Successfully deleted {ProjectToDelete.Name}.");
-                            projects.Remove(ProjectToDelete);
+                            myProjectServices.RemoveProject(ProjectToDelete);
                         }
                         else
                             Console.WriteLine("No projects to delete from.");
