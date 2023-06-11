@@ -320,7 +320,7 @@ namespace PracticePanther
 
                         if (myProjectServices.AmountofProjects() > 0)
                         {
-                            Console.WriteLine(String.Format("{0,-5} {1, -18} {2, -18} {3}", "ID", "Project", "Client Ids", "Activity"));
+                            Console.WriteLine(String.Format("{0,-5} {1, -18} {2, -1 8} {3}", "ID", "Project", "Client Ids", "Activity"));
                             Console.WriteLine("Enter project Id that you want to delete.");
                             myProjectServices.PrintProjects();
                             int IdToDelete = int.Parse(Console.ReadLine() ?? "-1");

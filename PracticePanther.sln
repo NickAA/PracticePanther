@@ -5,7 +5,9 @@ VisualStudioVersion = 17.6.33712.159
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PracticePanther", "PracticePanther\PracticePanther.csproj", "{EBECE846-8BCE-4916-9ACE-2BD392535DFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Panther.Library", "Panther.Library\Panther.Library.csproj", "{5C8EABB8-97D2-4B4B-AF11-5D966E4CB55B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Panther.Library", "Panther.Library\Panther.Library.csproj", "{5C8EABB8-97D2-4B4B-AF11-5D966E4CB55B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticePanther.maui", "PracticePanther.maui\PracticePanther.maui.csproj", "{C177F9D1-F3DC-4AB1-9C62-17E37D34515B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,12 @@ Global
 		{5C8EABB8-97D2-4B4B-AF11-5D966E4CB55B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C8EABB8-97D2-4B4B-AF11-5D966E4CB55B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C8EABB8-97D2-4B4B-AF11-5D966E4CB55B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C177F9D1-F3DC-4AB1-9C62-17E37D34515B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C177F9D1-F3DC-4AB1-9C62-17E37D34515B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C177F9D1-F3DC-4AB1-9C62-17E37D34515B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{C177F9D1-F3DC-4AB1-9C62-17E37D34515B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C177F9D1-F3DC-4AB1-9C62-17E37D34515B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C177F9D1-F3DC-4AB1-9C62-17E37D34515B}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
