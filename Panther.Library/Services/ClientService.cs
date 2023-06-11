@@ -9,7 +9,12 @@ namespace Panther.Library.Services
 {
     public class ClientService
     {
-        public List<Client> clients = new List<Client>();
+        private List<Client> clients;
+        public List<Client> Clients
+        {
+            get { return clients; }
+        }
+
         private static ClientService? instance;
         private static object _lock = new object();
 
@@ -57,8 +62,19 @@ namespace Panther.Library.Services
         public Client? FindClient(int ID)
         { return clients.FirstOrDefault(c => c.Id == ID); }
 
-        private ClientService() { }
+        private ClientService() 
+        {
+            clients = new List<Client>();
+            AddClient("Nick");
+            AddClient("Andrew");
+            AddClient("Penelope");
+        }
 
-        
+        public List<Client> Search(string query)
+        {
+            return clients.Where(c => c.Name.ToUpper().Contains(query.ToUpper())).ToList();
+        }
+
+
     }
 }

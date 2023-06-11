@@ -9,22 +9,41 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="12*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
-
+            <!-- This Grid is for Search Box-->
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 
-                
-                <Entry Text="{Binding Path=Hello}" Grid.Column="0"></Entry>
-                <Button Grid.Column="1" Text="Search" Clicked="Button_Clicked"></Button>
+                <Entry Text="{Binding Path=Query}" Grid.Column="0"></Entry>
+                <Button Grid.Column="1" Text="Search" Clicked="SearchClicked"></Button>
             </Grid>
 
+            <!-- This Grid is for Client list-->
             <Grid Grid.Row="1">
-                <Entry Text="{Binding Path=Interface}"></Entry>
+                <ListView ItemsSource="{Binding Path=Clients, Mode=TwoWay}"
+                          SelectedItem="{Binding Path=SelectedClient, Mode=TwoWay}">
+                </ListView>
+                
+            </Grid>
+
+            <!-- This Grid is for buttons-->
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button Text="Create" Grid.Column="0"></Button>
+                <Button Text="Update" Grid.Column="1"></Button>
+                <Button Text="Info" Grid.Column="2"></Button>
+                <Button Text="Delete" Grid.Column="3" Background="Red" Clicked="DeleteClicked"></Button>
             </Grid>
             
             

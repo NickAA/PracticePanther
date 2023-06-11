@@ -13,9 +13,14 @@ namespace PracticePanther.maui
         }
 
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private void SearchClicked(object sender, EventArgs e)
         {
+            (BindingContext as MainViewModel).Search();
+        }
 
+        private void DeleteClicked(object sender, EventArgs e)
+        {
+            (BindingContext as MainViewModel).Delete();
         }
     }
 }
