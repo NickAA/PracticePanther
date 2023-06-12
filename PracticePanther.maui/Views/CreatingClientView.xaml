@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PracticePanther.maui.Views.CreatingClientView"
+             Title="CreatingClientView">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="25"
+                             Padding="500, 0"
+                             VerticalOptions="Center">
+
+            <Entry Text="{Binding Path=NewClient}"></Entry>
+            
+            
+            <Button Text="Add Client" Clicked="AddClient"></Button>
+            
+            <Button Text="Return to Client Menu" Clicked="ClientMenu"></Button>
+                
+                
+        </VerticalStackLayout>
+        
+        
+    </ScrollView>
+</ContentPage>

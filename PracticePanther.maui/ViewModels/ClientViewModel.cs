@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace PracticePanther.maui.ViewModels
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class ClientViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<Client> Clients
         {
             get 
-            { 
+            {
                 if (string.IsNullOrEmpty(Query))
                     return new ObservableCollection<Client>(ClientService.Current.Clients);
 
@@ -25,9 +25,19 @@ namespace PracticePanther.maui.ViewModels
         }
         public string Query { get; set; }
 
+        public string NewClient { get; set; }
+
         public void Search ()
         {
             NotifyPropertyChanged("Clients");
+        }
+
+        public void Add()
+        {
+            if (string.IsNullOrEmpty(NewClient))
+                return;
+
+            ClientService.Current.AddClient(NewClient);
         }
 
         public Client SelectedClient { get; set; }
@@ -40,6 +50,7 @@ namespace PracticePanther.maui.ViewModels
                 return;
 
             ClientService.Current.RemoveClient(SelectedClient);
+            // Notify Client not working find out tomorrow
             NotifyPropertyChanged("Clients");
         }
 
