@@ -19,6 +19,8 @@ namespace PracticePanther.Models
         public int Id { get; set; }
         static private int ClientsCreated = 0;
 
+        public Project Project { get; set; }
+
         public DateTime OpenDate { get; set; }
         public DateTime CloseDate { get; set; }
 

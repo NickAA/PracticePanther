@@ -22,4 +22,9 @@ public partial class UpdateClient : ContentPage
     {
 		BindingContext = null;
     }
+
+    private void ClientMenu(object sender, EventArgs e)
+    {
+        Shell.Current.GoToAsync("//Client");
+    }
 }

@@ -24,7 +24,9 @@ namespace PracticePanther.maui.ViewModels
         {
             SelectedClient = ClientService.Current.FindClient(ClientsId);
 
-            ClientToUpdateName = $"Updating {SelectedClient.Name}";
+            ClientToUpdateName = SelectedClient.Name;
+            UpdateTitle = $"Updating {SelectedClient.Name}";
+            Notes = SelectedClient.Notes;
         }
 
         public ObservableCollection<Client> Clients
@@ -39,9 +41,13 @@ namespace PracticePanther.maui.ViewModels
         }
         public string Query { get; set; }
 
+        public string Notes { get; set; }
+
         public string NewClient { get; set; }
 
         public string AddedClient { get; set; }
+
+        public string UpdateTitle { get; set; }
 
         public string ClientToUpdateName { get; set; }
 

@@ -5,22 +5,48 @@
              Title="UpdateClient"
              NavigatedFrom="OnLeaving"
              NavigatedTo="OnArriving">
-    <VerticalStackLayout>
+    <Grid>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="12*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
 
-        <Label Text="{Binding Path=ClientToUpdateName}" HorizontalOptions="Center" FontSize="Large"/>
-        
-        <Label Text="Edit Name"/>
-        <Entry Text="{Binding Path=ClientToUpdateName}"/>
+        <Grid Grid.Row="0">
+            <Label Text="{Binding Path=UpdateTitle}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large"/>
+        </Grid>
 
-        <Picker Title="Select Activity"/>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Label Text="Edit Name" Grid.Row="0"/>
+            <Entry Text="{Binding Path=ClientToUpdateName}" Grid.Row="0" HeightRequest="40"/>
 
-        <Label Text="Edit Notes"/>
-        <Entry Text="Add Notes"/>
+            <Picker Title="Select Activity" Grid.Row="1"/>
+            
+            <Picker Title="Select Project to Associate Client" Grid.Row="2"/>
 
-        <Picker Title="Select Project to Associate Client"/>
+            <Label Text="Edit Notes" Grid.Row="3"/>
+            <Editor Text="{Binding Path=Notes}" Grid.Row="3" Margin="0, 20, 0, -80"/>
 
+        </Grid>
 
-        <Button Text="Client Menu" WidthRequest="200"/>
-    </VerticalStackLayout>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Text="Save" Grid.Column="1"/>
+            <Button Text="Client Menu" Clicked="ClientMenu"/>
+        </Grid>
+    
+    
+    </Grid>
 </ContentPage>
