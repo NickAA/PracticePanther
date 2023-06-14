@@ -3,6 +3,7 @@ namespace PracticePanther.maui.Views;
 
 public partial class ClientMenu : ContentPage
 {
+
     public ClientMenu()
     {
         InitializeComponent();
@@ -28,5 +29,23 @@ public partial class ClientMenu : ContentPage
     private void ToMainMenu(object sender, EventArgs e)
     {
         Shell.Current.GoToAsync("//MainPage");
+    }
+    private void UpdateClient(object sender, EventArgs e)
+    {
+        if ((BindingContext as ClientViewModel).SelectedClient != null)
+        {
+            var clientsId = (BindingContext as ClientViewModel).SelectedClient.Id;
+            Shell.Current.GoToAsync($"//UpdateClient?clientsid={clientsId}");
+        }
+    }
+
+    private void OnLeaving(object sender, NavigatedFromEventArgs e)
+    {
+        BindingContext = null;
+    }
+
+    private void OnArriving(object sender, NavigatedToEventArgs e)
+    {
+        BindingContext = new ClientViewModel(true);
     }
 }

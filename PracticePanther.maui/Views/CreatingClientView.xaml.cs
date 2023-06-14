@@ -20,4 +20,12 @@ public partial class CreatingClientView : ContentPage
     {
         (BindingContext as ClientViewModel).Add();
     }
+    private void OnLeaving(object sender, NavigatedFromEventArgs e)
+    {
+        BindingContext = null;
+    }
+    private void OnArriving(object sender, NavigatedToEventArgs e)
+    {
+        BindingContext = new ClientViewModel();
+    }
 }

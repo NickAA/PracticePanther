@@ -13,6 +13,20 @@ namespace PracticePanther.maui.ViewModels
 {
     public class ClientViewModel : INotifyPropertyChanged
     {
+
+        public ClientViewModel(bool NewClients = false) 
+        {
+            if (NewClients)
+                NotifyPropertyChanged("Clients");
+        }
+
+        public ClientViewModel(int ClientsId)
+        {
+            SelectedClient = ClientService.Current.FindClient(ClientsId);
+
+            ClientToUpdateName = $"Updating {SelectedClient.Name}";
+        }
+
         public ObservableCollection<Client> Clients
         {
             get 
@@ -27,6 +41,12 @@ namespace PracticePanther.maui.ViewModels
 
         public string NewClient { get; set; }
 
+        public string AddedClient { get; set; }
+
+        public string ClientToUpdateName { get; set; }
+
+        public Client SelectedClient { get; set; }
+
         public void Search ()
         {
             NotifyPropertyChanged("Clients");
@@ -38,9 +58,13 @@ namespace PracticePanther.maui.ViewModels
                 return;
 
             ClientService.Current.AddClient(NewClient);
+            AddedClient = $"{NewClient} has been added";
+            NotifyPropertyChanged(nameof(AddedClient));
+
+            NewClient = string.Empty;
+            NotifyPropertyChanged(nameof(NewClient));
         }
 
-        public Client SelectedClient { get; set; }
 
 
 
