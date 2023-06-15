@@ -105,7 +105,9 @@ namespace PracticePanther.maui.ViewModels
 
         public void Save()
         {
-            SelectedClient.Name = ClientToUpdateName; 
+            SelectedClient.Name = ClientToUpdateName;
+            UpdateTitle = $"Updating {SelectedClient.Name}";
+            NotifyPropertyChanged("UpdateTitle");
 
             if (Activity == "Active")
                 SelectedClient.IsActive = true;
