@@ -30,9 +30,9 @@ namespace PracticePanther.maui.ViewModels
             if (SelectedClient.IsActive == true)
                 Activity = "Active";
             else
-                Activity = "Inactive";
+                Activity = "InActive";
 
-            AssociatedProject = SelectedClient.Project?.Name;
+            AssociatedProject = SelectedClient.Project;
 
             UpdateTitle = $"Updating {SelectedClient.Name}";
             Notes = SelectedClient.Notes;
@@ -52,7 +52,7 @@ namespace PracticePanther.maui.ViewModels
             }
         }
 
-        public string AssociatedProject { get; set; }
+        public Project AssociatedProject { get; set; }
 
         public List<Project> AvaliableProjects { get; set; }
 
@@ -112,7 +112,7 @@ namespace PracticePanther.maui.ViewModels
             else
                 SelectedClient.IsActive = false;
 
-            SelectedClient.Project = ProjectService.Current.FindProject(AssociatedProject);
+            SelectedClient.Project = AssociatedProject;
 
             SelectedClient.Notes = Notes;
         }

@@ -5,18 +5,6 @@
              Title="ClientMenu"
              NavigatedFrom="OnLeaving"
              NavigatedTo="OnArriving">
-    
-
-    <ContentPage.Resources>
-        <Style TargetType="Button">
-            <Style.Triggers>
-                <Trigger TargetType="Button" Property="IsPressed" Value="True">
-                    <Setter Property="Background" Value="Gray"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </ContentPage.Resources>
-    
     <ScrollView>
         <Grid>
             <Grid.RowDefinitions>
@@ -38,8 +26,48 @@
 
             <!-- This Grid is for Client list-->
             <Grid Grid.Row="1">
-                <ListView ItemsSource="{Binding Path=Clients, Mode=TwoWay}"
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="18*"/>
+                </Grid.RowDefinitions>
+                <BoxView HeightRequest="1" VerticalOptions="End" Grid.Row="0"/>
+                <Grid Grid.Row="0" VerticalOptions="End">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Text="ID"/>
+                    <Label Grid.Column="1" Text="Name"/>
+                    <Label Grid.Column="2" Text="Activity"/>
+                    <Label Grid.Column="3" Text="Associated Project"/>
+                    <Label Grid.Column="4" Text="Opening date"/>
+                </Grid>
+
+                <ListView ItemsSource="{Binding Path=Clients, Mode=TwoWay}" Grid.Row="1"
                           SelectedItem="{Binding Path=SelectedClient, Mode=TwoWay}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="3*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Text="{Binding Path=IdDisplay}"/>
+                                    <Label Grid.Column="1" Text="{Binding Path=Name}"/>
+                                    <Label Grid.Column="2" Text="{Binding Path=ActiveDisplay}"/>
+                                    <Label Grid.Column="3" Text="{Binding Path=ProjectName}"/>
+                                    <Label Grid.Column="4" Text="{Binding Path=OpeningDate}"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
                 </ListView>
 
             </Grid>

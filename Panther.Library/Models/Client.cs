@@ -22,6 +22,7 @@ namespace PracticePanther.Models
         public Project? Project { get; set; }
 
         public DateTime OpenDate { get; set; }
+        public string OpeningDate { get { return OpenDate.ToString("MM/dd/yyyy"); } }
         public DateTime CloseDate { get; set; }
 
         public bool IsActive { get; set; }
@@ -29,17 +30,28 @@ namespace PracticePanther.Models
         public string Name { get; set; }
         public string Notes { get; set; }
 
-        public override string ToString()
+        public string ProjectName
         {
-            string Active;
-            if (IsActive)
-                Active = "Active";
-            else
-                Active = "Inactive";
-
-            string strFormat = String.Format("{0,-5} {1, -18} {2}", Id, Name, Active);
-            return $"{strFormat}";
+            get { return Project?.Name != null ? Project.Name : "Not Assigned"; }
         }
+        public string ActiveDisplay
+        {
+            get
+            {
+                return IsActive ? "Active" : "Inactive";
+            }
+        }
+
+        public string IdDisplay
+        {
+            get
+            {
+                return Id.ToString();
+            }
+        }
+
+        public override string ToString()
+        { return $"{Id,-8} {Name, -20} {ActiveDisplay}"; }
 
 
     }

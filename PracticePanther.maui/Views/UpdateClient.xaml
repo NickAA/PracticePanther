@@ -30,7 +30,7 @@
             <Entry Text="{Binding Path=ClientToUpdateName}" Grid.Row="0" HeightRequest="40"/>
 
             <Picker Title="Select Activity" Grid.Row="1"
-                    SelectedItem="{Binding Path=Activity}">
+                    SelectedItem="{Binding Path=Activity}" SelectedIndex="1">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>Active</x:String>
