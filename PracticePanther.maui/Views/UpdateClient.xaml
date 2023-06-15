@@ -29,9 +29,20 @@
             <Label Text="Edit Name" Grid.Row="0"/>
             <Entry Text="{Binding Path=ClientToUpdateName}" Grid.Row="0" HeightRequest="40"/>
 
-            <Picker Title="Select Activity" Grid.Row="1"/>
-            
-            <Picker Title="Select Project to Associate Client" Grid.Row="2"/>
+            <Picker Title="Select Activity" Grid.Row="1"
+                    SelectedItem="{Binding Path=Activity}">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Active</x:String>
+                        <x:String>InActive</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <Picker Title="Select Project to Associate Client" Grid.Row="2"
+                    ItemsSource="{Binding Path=AvaliableProjects}"
+                    ItemDisplayBinding="{Binding Path=Name}"
+                    SelectedItem="{Binding Path=AssociatedProject}"/>
 
             <Label Text="Edit Notes" Grid.Row="3"/>
             <Editor Text="{Binding Path=Notes}" Grid.Row="3" Margin="0, 20, 0, -80"/>
@@ -43,7 +54,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Text="Save" Grid.Column="1"/>
+            <Button Text="Save" Grid.Column="1" Clicked="Save"/>
             <Button Text="Client Menu" Clicked="ClientMenu"/>
         </Grid>
     

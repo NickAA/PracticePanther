@@ -52,6 +52,9 @@ namespace Panther.Library.Services
         public Project FindProject(int Id)
         { return projects.FirstOrDefault(c => c.Id == Id); }
 
+        public Project FindProject(string Name)
+        { return projects.FirstOrDefault(c => c.Name == Name); }
+
         public int AmountofProjects()
         { return projects.Count(); }
 
@@ -71,7 +74,11 @@ namespace Panther.Library.Services
             ProjectwithClient.Clients.Remove(client);
         }
 
-        private ProjectService() { }
+        private ProjectService() 
+        {
+            AddProject("Azzi's Case");
+            AddProject("John's Cases");
+        }
 
     }
 }

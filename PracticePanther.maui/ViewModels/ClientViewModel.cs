@@ -23,10 +23,22 @@ namespace PracticePanther.maui.ViewModels
         public ClientViewModel(int ClientsId)
         {
             SelectedClient = ClientService.Current.FindClient(ClientsId);
+            AvaliableProjects = ProjectService.Current.projects;
 
             ClientToUpdateName = SelectedClient.Name;
+
+            if (SelectedClient.IsActive == true)
+                Activity = "Active";
+            else
+                Activity = "Inactive";
+
+            AssociatedProject = SelectedClient.Project?.Name;
+
             UpdateTitle = $"Updating {SelectedClient.Name}";
             Notes = SelectedClient.Notes;
+
+
+            NotifyPropertyChanged("Options");
         }
 
         public ObservableCollection<Client> Clients
@@ -39,6 +51,13 @@ namespace PracticePanther.maui.ViewModels
                 return new ObservableCollection<Client>(ClientService.Current.Search(Query));
             }
         }
+
+        public string AssociatedProject { get; set; }
+
+        public List<Project> AvaliableProjects { get; set; }
+
+        public string Activity { get; set; }
+
         public string Query { get; set; }
 
         public string Notes { get; set; }
@@ -84,7 +103,19 @@ namespace PracticePanther.maui.ViewModels
             NotifyPropertyChanged("Clients");
         }
 
+        public void Save()
+        {
+            SelectedClient.Name = ClientToUpdateName; 
 
+            if (Activity == "Active")
+                SelectedClient.IsActive = true;
+            else
+                SelectedClient.IsActive = false;
+
+            SelectedClient.Project = ProjectService.Current.FindProject(AssociatedProject);
+
+            SelectedClient.Notes = Notes;
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

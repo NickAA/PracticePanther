@@ -10,7 +10,7 @@ public partial class UpdateClient : ContentPage
 
 	public UpdateClient()
 	{
-		InitializeComponent();
+        InitializeComponent();
 	}
 
     private void OnArriving(object sender, NavigatedToEventArgs e)
@@ -26,5 +26,10 @@ public partial class UpdateClient : ContentPage
     private void ClientMenu(object sender, EventArgs e)
     {
         Shell.Current.GoToAsync("//Client");
+    }
+
+    private void Save(object sender, EventArgs e)
+    {
+        (BindingContext as ClientViewModel).Save();
     }
 }
