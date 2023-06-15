@@ -23,7 +23,7 @@ namespace PracticePanther.Models
 
         public DateTime OpenDate { get; set; }
         public string OpeningDate { get { return OpenDate.ToString("MM/dd/yyyy"); } }
-        public DateTime CloseDate { get; set; }
+        public DateTime? CloseDate { get; set; }
 
         public bool IsActive { get; set; }
 

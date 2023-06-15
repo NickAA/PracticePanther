@@ -37,6 +37,8 @@ namespace PracticePanther.maui.ViewModels
             UpdateTitle = $"Updating {SelectedClient.Name}";
             Notes = SelectedClient.Notes;
 
+            ClientsOpenDate = SelectedClient.OpenDate;
+            ClientsCloseDate = SelectedClient.CloseDate;
 
             NotifyPropertyChanged("Options");
         }
@@ -56,7 +58,22 @@ namespace PracticePanther.maui.ViewModels
 
         public List<Project> AvaliableProjects { get; set; }
 
-        public string Activity { get; set; }
+        private string activity;
+        public string Activity { get { return activity; } 
+            set 
+            {
+                activity = value;
+
+                if (Activity == "Active")
+                    IsEnabled = false;
+                else
+                    IsEnabled = true;
+
+                NotifyPropertyChanged("IsEnabled");
+            }
+        }
+
+        public bool IsEnabled { get; set; }
 
         public string Query { get; set; }
 
@@ -71,6 +88,10 @@ namespace PracticePanther.maui.ViewModels
         public string ClientToUpdateName { get; set; }
 
         public Client SelectedClient { get; set; }
+
+        public DateTime ClientsOpenDate { get; set; }
+        public DateTime? ClientsCloseDate { get; set; }
+
 
         public void Search ()
         {
@@ -113,6 +134,10 @@ namespace PracticePanther.maui.ViewModels
                 SelectedClient.IsActive = true;
             else
                 SelectedClient.IsActive = false;
+
+            SelectedClient.OpenDate = ClientsOpenDate;
+            if (IsEnabled)
+                SelectedClient.CloseDate = ClientsCloseDate;
 
             SelectedClient.Project = AssociatedProject;
 
