@@ -27,5 +27,9 @@
         Title="Update Client"
         ContentTemplate="{DataTemplate local2:UpdateClient}"
         Route="UpdateClient" />
+    <ShellContent
+        Title="Client Details"
+        ContentTemplate="{DataTemplate local2:ClientDetailsView}"
+        Route="ClientDetails" />
 
 </Shell>

@@ -48,4 +48,13 @@ public partial class ClientMenu : ContentPage
     {
         BindingContext = new ClientViewModel(true);
     }
+
+    private void ClientDetailsClicked(object sender, EventArgs e)
+    {
+        if ((BindingContext as ClientViewModel).SelectedClient != null)
+        {
+            var clientsId = (BindingContext as ClientViewModel).SelectedClient.Id;
+            Shell.Current.GoToAsync($"//ClientDetails?clientsid={clientsId}");
+        }
+    }
 }

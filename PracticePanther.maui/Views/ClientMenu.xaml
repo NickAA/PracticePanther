@@ -84,7 +84,7 @@
 
                 <Button Text="Create" Grid.Column="0" Clicked="NewClientClicked"></Button>
                 <Button Text="Update" Clicked="UpdateClient" Grid.Column="1"></Button>
-                <Button Text="Info" Grid.Column="2"></Button>
+                <Button Text="Info" Grid.Column="2" Clicked="ClientDetailsClicked"></Button>
                 <Button Text="Delete" Grid.Column="3" Background="Red" Clicked="DeleteClicked"></Button>
                 <Button Text="Main Menu" Grid.Column="4" Clicked="ToMainMenu"></Button>
             </Grid>

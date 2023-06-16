@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PracticePanther.maui.Views.ClientDetailsView"
+             Title="ClientDetailsView"
+             NavigatedTo="OnArriving"
+             NavigatedFrom="OnDeparting"
+             >
+<Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="12*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Label Text="{Binding Path=ClientToUpdateName, StringFormat='Viewing {0}'}" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Label FontSize="Subtitle" Text="{Binding Path=ClientToUpdateName, StringFormat='Name: {0}'}" Grid.Column="0"/>
+                <Label FontSize="Subtitle" Text="{Binding Path=AssociatedID, StringFormat='ID: {0}'}" Grid.Column="1"/>
+            </Grid>
+
+
+            <Grid Grid.Row="1" Padding="0, 0, 0, 20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="1" FontSize="Subtitle" Text="{Binding Path=ClientsOpenDateFormat, StringFormat='Open Date: {0}'}"/>
+
+                <Label FontSize="Subtitle" Grid.Column="2" Text="{Binding Path=ClientsCloseDateFormat, StringFormat='Close Date: {0}'}"/>
+
+                <Label FontSize="Subtitle" Text="{Binding Path=Activity, StringFormat='This Client is: {0}'}"/>
+            </Grid>
+
+
+            <Label FontSize="Subtitle" Text="{Binding Path=ProjectNameDetail, StringFormat='Project Associated with Client: {0}'}" Grid.Row="2"/>
+
+            <Label Text="Notes" Grid.Row="3" FontSize="Subtitle"/>
+            <Label Text="{Binding Path=Notes}" Grid.Row="3" Margin="0, 25, 0, -80"/>
+
+        </Grid>
+
+        <Button Text="Client Menu" Clicked="ClientMenu" Grid.Row="2" WidthRequest="800"/>
+
+
+    </Grid>
+</ContentPage>

@@ -22,6 +22,7 @@ namespace PracticePanther.maui.ViewModels
 
         public ClientViewModel(int ClientsId)
         {
+            AssociatedID = ClientsId;
             SelectedClient = ClientService.Current.FindClient(ClientsId);
             AvaliableProjects = ProjectService.Current.projects;
 
@@ -54,7 +55,9 @@ namespace PracticePanther.maui.ViewModels
             }
         }
 
+        public int AssociatedID { get; set; }
         public Project AssociatedProject { get; set; }
+        public string ProjectNameDetail { get { return AssociatedProject?.Name ?? "Not Assigned"; } }
 
         public List<Project> AvaliableProjects { get; set; }
 
@@ -90,7 +93,9 @@ namespace PracticePanther.maui.ViewModels
         public Client SelectedClient { get; set; }
 
         public DateTime ClientsOpenDate { get; set; }
+        public string ClientsOpenDateFormat { get { return ClientsOpenDate.ToString("MM/dd/yyyy"); } }
         public DateTime? ClientsCloseDate { get; set; }
+        public string ClientsCloseDateFormat { get { return ClientsCloseDate?.ToString("MM/dd/yyyy") ?? "N.A."; } }
 
 
         public void Search ()
