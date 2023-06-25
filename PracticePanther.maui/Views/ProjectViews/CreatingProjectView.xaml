@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PracticePanther.maui.Views.CreatingProjectView"
+             Title="CreatingProjectView"
+             NavigatedFrom="OnLeaving"
+             NavigatedTo="OnArriving">
+    <ScrollView>
+        <VerticalStackLayout Spacing="25"
+                             Padding="500, 0"
+                             VerticalOptions="Center">
+
+
+            <Label Text="{Binding Path=AddedProject}" HorizontalOptions="Center"></Label>
+            <Entry Text="{Binding Path=NewProject, Mode=TwoWay}" Completed="AddProject"></Entry>
+
+            <Button Text="Add Project" Clicked="AddProject"></Button>
+
+            <Button Text="Return to Project Menu" Clicked="ProjectMenu"></Button>
+
+
+        </VerticalStackLayout>
+
+
+    </ScrollView>
+</ContentPage>

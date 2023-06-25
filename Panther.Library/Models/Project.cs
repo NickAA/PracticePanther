@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,37 +18,28 @@ namespace PracticePanther.Models
         }
 
         public int Id { get; set; }
+        public string IdDisplay
+        { get { return Id.ToString(); } }
+
         static private int ProjectsCreated = 0;
 
         public List<Client> Clients { get; set; }
+        public string ClientName
+        { get { return Clients?.Count == 0 ? "Not Assigned" : "Contains Clients"; } }
 
         public DateTime OpenDate { get; set; }
-        public DateTime CloseDate { get; set; }
+        public string OpeningDate
+        { get { return OpenDate.ToString("MM/dd/yyyy"); } }
+        public DateTime? CloseDate { get; set; }
 
         public bool IsActive { get; set; }
+        public string ActiveDisplay
+        { get { return IsActive ? "Active" : "Inactive"; } }
 
         public string Name { get; set; }
         public string Notes { get; set; }
 
         public override string ToString()
-        {
-            string Active = "Inactive", Client = "None";
-
-            if (IsActive)
-                Active = "Active";
-
-            if (Clients.Count != 0)
-                for (int i = 0; i < Clients.Count; i++)
-                {
-                    if (i == 0)
-                        Client = Clients[0].Id.ToString();
-                    else
-                        Client += $" {Clients[i].Id.ToString()}";
-                }
-
-
-            string strFormat = String.Format("{0,-5} {1, -18} {2, -18} {3}", Id, Name, Client, Active);
-            return $"{strFormat}";
-        }
+        { return $"{Name}"; }
     }
 }

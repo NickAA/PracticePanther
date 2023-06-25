@@ -41,7 +41,6 @@ namespace PracticePanther.maui.ViewModels
             ClientsOpenDate = SelectedClient.OpenDate;
             ClientsCloseDate = SelectedClient.CloseDate;
 
-            NotifyPropertyChanged("Options");
         }
 
         public ObservableCollection<Client> Clients
@@ -56,8 +55,22 @@ namespace PracticePanther.maui.ViewModels
         }
 
         public int AssociatedID { get; set; }
-        public Project AssociatedProject { get; set; }
-        public string ProjectNameDetail { get { return AssociatedProject?.Name ?? "Not Assigned"; } }
+        public List<Project> AssociatedProject { get; set; }
+        public string ProjectNameDetail { get
+            {
+                if (AssociatedProject == null)
+                    return "Not Assigned";
+
+                string NameOfProjects = string.Empty;
+
+                foreach (Project project in AssociatedProject)
+                {
+                    NameOfProjects += project.Name + " ";
+                }
+
+                return NameOfProjects;
+            }
+        }
 
         public List<Project> AvaliableProjects { get; set; }
 
@@ -95,7 +108,7 @@ namespace PracticePanther.maui.ViewModels
         public DateTime ClientsOpenDate { get; set; }
         public string ClientsOpenDateFormat { get { return ClientsOpenDate.ToString("MM/dd/yyyy"); } }
         public DateTime? ClientsCloseDate { get; set; }
-        public string ClientsCloseDateFormat { get { return ClientsCloseDate?.ToString("MM/dd/yyyy") ?? "N.A."; } }
+        public string ClientsCloseDateFormat { get { return SelectedClient.IsActive ? "N.A." : ClientsCloseDate?.ToString("MM/dd/yyyy"); } }
 
 
         public void Search ()
@@ -125,7 +138,7 @@ namespace PracticePanther.maui.ViewModels
                 return;
 
             ClientService.Current.RemoveClient(SelectedClient);
-            // Notify Client not working find out tomorrow
+            // Works now
             NotifyPropertyChanged("Clients");
         }
 
@@ -150,7 +163,6 @@ namespace PracticePanther.maui.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

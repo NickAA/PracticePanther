@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PracticePanther.maui.Views.UpdateClient"
-             Title="UpdateClient"
+             x:Class="PracticePanther.maui.Views.UpdateProject"
+             Title="UpdateProject"
              NavigatedFrom="OnLeaving"
              NavigatedTo="OnArriving">
     <Grid>
@@ -27,7 +27,7 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <Label Text="Edit Name" Grid.Row="0"/>
-            <Entry Text="{Binding Path=ClientToUpdateName}" Grid.Row="0" HeightRequest="40"/>
+            <Entry Text="{Binding Path=ProjectToUpdateName}" Grid.Row="0" HeightRequest="40"/>
 
             <Grid Grid.Row="1" Padding="0, 0, 0, 20">
                 <Grid.ColumnDefinitions>
@@ -37,10 +37,10 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Grid.Column="1" Text="Open Date" Padding="0, 0, 0, 0"/>
-                <DatePicker Grid.Column="1" Date="{Binding Path=ClientsOpenDate}"/>
-                
+                <DatePicker Grid.Column="1" Date="{Binding Path=ProjectsOpenDate}"/>
+
                 <Label Grid.Column="2" Text="Close Date" Padding="0, 0, 0, 0"/>
-                <DatePicker Grid.Column="2" IsEnabled="{Binding Path=IsEnabled}" Date="{Binding Path=ClientsCloseDate}"/>
+                <DatePicker Grid.Column="2" IsEnabled="{Binding Path=IsEnabled}" Date="{Binding Path=ProjectsCloseDate}"/>
 
                 <Picker Title="Select Activity" Grid.Column="0"
                     SelectedItem="{Binding Path=Activity}" SelectedIndex="1">
@@ -52,11 +52,10 @@
                     </Picker.ItemsSource>
                 </Picker>
             </Grid>
-        
-            <Picker Title="Select Project to Associate Client" Grid.Row="2"
-                    ItemsSource="{Binding Path=AvaliableProjects}"
-                    ItemDisplayBinding="{Binding Path=Name}"
-                    SelectedItem="{Binding Path=AssociatedProject}"/>
+
+            <CollectionView ItemsSource="{Binding Path=AvaliableClients}"
+                            SelectionMode="Multiple" Grid.Row="2" EmptyView="No Clients Available"
+                            SelectedItems="{Binding Path=AssociatedProject, Mode=TwoWay}"/>
 
             <Label Text="Edit Notes" Grid.Row="3"/>
             <Editor Text="{Binding Path=Notes}" Grid.Row="3" Margin="0, 20, 0, -80" AutoSize="TextChanges"/>
@@ -69,9 +68,9 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Button Text="Save" Grid.Column="1" Clicked="Save"/>
-            <Button Text="Client Menu" Clicked="ClientMenu"/>
+            <Button Text="Project Menu" Clicked="ProjectMenu"/>
         </Grid>
-    
-    
+
+
     </Grid>
 </ContentPage>

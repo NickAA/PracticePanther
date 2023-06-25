@@ -57,19 +57,28 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\ClientDetailsView.xaml">
+	  <MauiXaml Update="Views\ClientViews\ClientDetailsView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\ClientMenu.xaml">
+	  <MauiXaml Update="Views\ClientViews\ClientMenu.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\CreatingClientView.xaml">
+	  <MauiXaml Update="Views\ClientViews\CreatingClientView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\ProjectMenu.xaml">
+	  <MauiXaml Update="Views\ProjectViews\CreatingProjectView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\UpdateClient.xaml">
+	  <MauiXaml Update="Views\ProjectViews\ProjectDetailView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ProjectViews\ProjectMenu.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ClientViews\UpdateClient.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ProjectViews\UpdateProject.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

@@ -11,14 +11,12 @@
         Title="Main Menu"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
+    
+    <!--Client Views-->
     <ShellContent
         Title="Client Menu"
         ContentTemplate="{DataTemplate local2:ClientMenu}"
         Route="Client" />
-    <ShellContent
-        Title="Project Menu"
-        ContentTemplate="{DataTemplate local2:ProjectMenu}"
-        Route="Project" />
     <ShellContent
         Title="New Client"
         ContentTemplate="{DataTemplate local2:CreatingClientView}"
@@ -31,5 +29,25 @@
         Title="Client Details"
         ContentTemplate="{DataTemplate local2:ClientDetailsView}"
         Route="ClientDetails" />
+    
+    <!--Project Views-->
+    <ShellContent
+        Title="Project Menu"
+        ContentTemplate="{DataTemplate local2:ProjectMenu}"
+        Route="Project" />
+    <ShellContent
+        Title="New Project"
+        ContentTemplate="{DataTemplate local2:CreatingProjectView}"
+        Route="NewProject" />
+    <ShellContent
+        Title="Update Project"
+        ContentTemplate="{DataTemplate local2:UpdateProject}"
+        Route="UpdateProject"
+        />
+    <ShellContent
+        Title="Update Details"
+        ContentTemplate="{DataTemplate local2:ProjectDetailView}"
+        Route="ProjectDetails"
+        />
 
 </Shell>

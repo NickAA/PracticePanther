@@ -25,9 +25,4 @@ public partial class ClientDetailsView : ContentPage
     {
         Shell.Current.GoToAsync("//Client");
     }
-
-    private void Save(object sender, EventArgs e)
-    {
-        (BindingContext as ClientViewModel).Save();
-    }
 }

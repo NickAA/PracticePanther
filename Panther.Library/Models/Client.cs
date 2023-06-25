@@ -19,7 +19,7 @@ namespace PracticePanther.Models
         public int Id { get; set; }
         static private int ClientsCreated = 0;
 
-        public Project? Project { get; set; }
+        public List<Project>? Project { get; set; }
 
         public DateTime OpenDate { get; set; }
         public string OpeningDate { get { return OpenDate.ToString("MM/dd/yyyy"); } }
@@ -31,27 +31,15 @@ namespace PracticePanther.Models
         public string Notes { get; set; }
 
         public string ProjectName
-        {
-            get { return Project?.Name != null ? Project.Name : "Not Assigned"; }
-        }
+        { get { return Project?.Count == null || Project?.Count == 0 ? "Not Assigned" : "Contains Projects"; } }
         public string ActiveDisplay
-        {
-            get
-            {
-                return IsActive ? "Active" : "Inactive";
-            }
-        }
+        { get { return IsActive ? "Active" : "Inactive"; } }
 
         public string IdDisplay
-        {
-            get
-            {
-                return Id.ToString();
-            }
-        }
+        { get { return Id.ToString(); } }
 
         public override string ToString()
-        { return $"{Id,-8} {Name, -20} {ActiveDisplay}"; }
+        { return $"{Name}"; }
 
 
     }

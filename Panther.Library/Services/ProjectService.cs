@@ -80,5 +80,8 @@ namespace Panther.Library.Services
             AddProject("John's Cases");
         }
 
+        public List<Project> Search(string query)
+        { return projects.Where(c => c.Name.ToUpper().Contains(query.ToUpper())).ToList(); }
+
     }
 }
