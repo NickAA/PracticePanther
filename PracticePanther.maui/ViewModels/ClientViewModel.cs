@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace PracticePanther.maui.ViewModels
 {
@@ -53,6 +54,21 @@ namespace PracticePanther.maui.ViewModels
                 return new ObservableCollection<Client>(ClientService.Current.Search(Query));
             }
         }
+
+        public ICommand MultiSelectionCommand => new Command<IList<object>>((obj) =>
+        {
+            List<Project> test = new List<Project>();
+
+            if (obj == null)
+                return;
+
+            foreach(Project p in obj)
+            {
+                var SelectedItems = p as Project;
+
+                test.Add(SelectedItems);
+            }
+        });
 
         public int AssociatedID { get; set; }
         public List<Project> AssociatedProject { get; set; }

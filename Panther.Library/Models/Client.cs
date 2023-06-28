@@ -14,6 +14,7 @@ namespace PracticePanther.Models
             OpenDate = DateTime.Today;
             IsActive = true;
             Id = ++ClientsCreated;
+            Project = new List<Project> ();
         }
 
         public int Id { get; set; }
