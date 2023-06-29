@@ -55,7 +55,7 @@
 
             <CollectionView ItemsSource="{Binding Path=AvaliableProjects}"
                             SelectionMode="Multiple" Grid.Row="2" EmptyView="No Projects Available"
-                            SelectionChangedCommand="{Binding MultiSelectionCommand}" SelectionChangedCommandParameter="{Binding SelectedItems}"/>
+                            SelectionChanged="CollectionView_SelectionChanged"/>
 
             <Label Text="Edit Notes" Grid.Row="3"/>
             <Editor Text="{Binding Path=Notes}" Grid.Row="3" Margin="0, 20, 0, -80" AutoSize="TextChanges"/>

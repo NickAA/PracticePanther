@@ -44,6 +44,23 @@ namespace PracticePanther.maui.ViewModels
 
         }
 
+        private ObservableCollection<Project> selectedProjects;
+        public ObservableCollection<Project> SelectedProjects
+        {
+            get
+            {
+                return selectedProjects;
+            }
+            set
+            {
+                if (selectedProjects != value)
+                {
+                    selectedProjects = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
         public ObservableCollection<Client> Clients
         {
             get 
@@ -55,20 +72,7 @@ namespace PracticePanther.maui.ViewModels
             }
         }
 
-        public ICommand MultiSelectionCommand => new Command<IList<object>>((obj) =>
-        {
-            List<Project> test = new List<Project>();
 
-            if (obj == null)
-                return;
-
-            foreach(Project p in obj)
-            {
-                var SelectedItems = p as Project;
-
-                test.Add(SelectedItems);
-            }
-        });
 
         public int AssociatedID { get; set; }
         public List<Project> AssociatedProject { get; set; }
