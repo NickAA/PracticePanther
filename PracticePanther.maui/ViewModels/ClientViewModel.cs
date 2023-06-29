@@ -34,7 +34,8 @@ namespace PracticePanther.maui.ViewModels
             else
                 Activity = "InActive";
 
-            AssociatedProject = SelectedClient.Project;
+            SelectedProjects = new ObservableCollection<Project>(SelectedClient.Project);
+            ShowedProjects = SelectedProjects;
 
             UpdateTitle = $"Updating {SelectedClient.Name}";
             Notes = SelectedClient.Notes;
@@ -44,13 +45,10 @@ namespace PracticePanther.maui.ViewModels
 
         }
 
+        private IList<Project> ShowedProjects;
         private ObservableCollection<Project> selectedProjects;
         public ObservableCollection<Project> SelectedProjects
-        {
-            get
-            {
-                return selectedProjects;
-            }
+        { get { return selectedProjects; }
             set
             {
                 if (selectedProjects != value)
@@ -75,22 +73,6 @@ namespace PracticePanther.maui.ViewModels
 
 
         public int AssociatedID { get; set; }
-        public List<Project> AssociatedProject { get; set; }
-        public string ProjectNameDetail { get
-            {
-                if (AssociatedProject == null)
-                    return "Not Assigned";
-
-                string NameOfProjects = string.Empty;
-
-                foreach (Project project in AssociatedProject)
-                {
-                    NameOfProjects += project.Name + " ";
-                }
-
-                return NameOfProjects;
-            }
-        }
 
         public List<Project> AvaliableProjects { get; set; }
 
@@ -177,7 +159,7 @@ namespace PracticePanther.maui.ViewModels
             if (IsEnabled)
                 SelectedClient.CloseDate = ClientsCloseDate;
 
-            SelectedClient.Project = AssociatedProject;
+            SelectedClient.Project = SelectedProjects.ToList();
 
             SelectedClient.Notes = Notes;
         }

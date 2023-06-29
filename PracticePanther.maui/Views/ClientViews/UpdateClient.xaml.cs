@@ -21,6 +21,7 @@ public partial class UpdateClient : ContentPage
 
     private void OnLeaving(object sender, NavigatedFromEventArgs e)
     {
+        (BindingContext as ClientViewModel).SelectedProjects = null;
 		BindingContext = null;
     }
 
