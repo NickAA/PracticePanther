@@ -12,6 +12,8 @@
 
             <Button Text="Project Menu" Clicked="ProjectMenuClicked"></Button>
 
+            <Button Text="Employee Menu" Clicked="EmployeeMenuClicked"/>
+
         </VerticalStackLayout>
         
         

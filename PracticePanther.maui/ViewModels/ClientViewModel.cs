@@ -136,7 +136,7 @@ namespace PracticePanther.maui.ViewModels
 
         public void Delete()
         {
-            if (SelectedClient == null)
+            if (SelectedClient == null || SelectedClient.Project.Count != 0)
                 return;
 
             ClientService.Current.RemoveClient(SelectedClient);
