@@ -25,7 +25,7 @@ namespace PracticePanther.maui.ViewModels
         {
             AssociatedID = ClientsId;
             SelectedClient = ClientService.Current.FindClient(ClientsId);
-            AvaliableProjects = ProjectService.Current.projects;
+            AvaliableProjects = new ObservableCollection<object>(ProjectService.Current.projects);
 
             ClientToUpdateName = SelectedClient.Name;
 
@@ -35,7 +35,8 @@ namespace PracticePanther.maui.ViewModels
                 Activity = "InActive";
 
             SelectedProjects = new ObservableCollection<Project>(SelectedClient.Project);
-            ShowedProjects = SelectedProjects;
+            ShowedProjects = new ObservableCollection<object>(SelectedClient.Project);
+            NotifyPropertyChanged(nameof(ShowedProjects));
 
             UpdateTitle = $"Updating {SelectedClient.Name}";
             Notes = SelectedClient.Notes;
@@ -45,7 +46,20 @@ namespace PracticePanther.maui.ViewModels
 
         }
 
-        private IList<Project> ShowedProjects;
+        public string ProjectNameDetail { get
+            {
+                if (SelectedProjects == null)
+                    return "No projects assigned.";
+
+                string ProjectMSG = string.Empty;
+
+                foreach (Project c in SelectedProjects)
+                    ProjectMSG += $"{c.Name}, ";
+
+                return ProjectMSG.Remove(ProjectMSG.Count() - 3);
+            } }
+
+        private ObservableCollection<object> ShowedProjects;
         private ObservableCollection<Project> selectedProjects;
         public ObservableCollection<Project> SelectedProjects
         { get { return selectedProjects; }
@@ -74,7 +88,7 @@ namespace PracticePanther.maui.ViewModels
 
         public int AssociatedID { get; set; }
 
-        public List<Project> AvaliableProjects { get; set; }
+        public ObservableCollection<object> AvaliableProjects { get; set; }
 
         private string activity;
         public string Activity { get { return activity; } 

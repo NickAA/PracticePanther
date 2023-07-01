@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PracticePanther", "Practice
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Panther.Library", "Panther.Library\Panther.Library.csproj", "{5C8EABB8-97D2-4B4B-AF11-5D966E4CB55B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticePanther.maui", "PracticePanther.maui\PracticePanther.maui.csproj", "{C177F9D1-F3DC-4AB1-9C62-17E37D34515B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PracticePanther.maui", "PracticePanther.maui\PracticePanther.maui.csproj", "{C177F9D1-F3DC-4AB1-9C62-17E37D34515B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

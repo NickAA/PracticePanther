@@ -12,7 +12,7 @@ public partial class UpdateClient : ContentPage
 	public UpdateClient()
 	{
         InitializeComponent();
-	}
+    }
 
     private void OnArriving(object sender, NavigatedToEventArgs e)
     {
@@ -21,7 +21,7 @@ public partial class UpdateClient : ContentPage
 
     private void OnLeaving(object sender, NavigatedFromEventArgs e)
     {
-        (BindingContext as ClientViewModel).SelectedProjects = null;
+        ClientsId = 0;
 		BindingContext = null;
     }
 
@@ -38,6 +38,7 @@ public partial class UpdateClient : ContentPage
     private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var value = new ObservableCollection<Project>((e.CurrentSelection).Select(o => (o as Project)).Where(t => t != null));
-        (BindingContext as ClientViewModel).SelectedProjects = value;
+        if (ClientsId != 0 && e.CurrentSelection.Count != 0)
+            (BindingContext as ClientViewModel).SelectedProjects = value;
     }
 }
