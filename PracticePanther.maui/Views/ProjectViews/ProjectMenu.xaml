@@ -42,7 +42,7 @@
                     <Label Grid.Column="0" Text="ID"/>
                     <Label Grid.Column="1" Text="Name"/>
                     <Label Grid.Column="2" Text="Activity"/>
-                    <Label Grid.Column="3" Text="Associated Project"/>
+                    <Label Grid.Column="3" Text="Associated Clients"/>
                     <Label Grid.Column="4" Text="Opening date"/>
                 </Grid>
 

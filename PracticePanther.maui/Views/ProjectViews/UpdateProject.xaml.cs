@@ -1,4 +1,6 @@
 using PracticePanther.maui.ViewModels;
+using PracticePanther.Models;
+using System.Collections.ObjectModel;
 
 namespace PracticePanther.maui.Views;
 
@@ -19,6 +21,7 @@ public partial class UpdateProject : ContentPage
 
     private void OnLeaving(object sender, NavigatedFromEventArgs e)
     {
+        ProjectsId = 0;
         BindingContext = null;
     }
 
@@ -30,5 +33,12 @@ public partial class UpdateProject : ContentPage
     private void Save(object sender, EventArgs e)
     {
         (BindingContext as ProjectViewModel).Save();
+    }
+
+    private void ClientsSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        var value = new ObservableCollection<Client>((e.CurrentSelection).Select(o => (o as Client)).Where(t => t != null));
+        if (ProjectsId != 0 && e.CurrentSelection.Count != 0)
+            (BindingContext as ProjectViewModel).AssociatedClients = value;
     }
 }

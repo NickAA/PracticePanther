@@ -33,7 +33,7 @@ namespace PracticePanther.maui.ViewModels
             else
                 Activity = "InActive";
 
-            AssociatedClients = SelectedProject.Clients;
+            AssociatedClients = new ObservableCollection<Client>(SelectedProject.Clients);
 
             UpdateTitle = $"Updating {SelectedProject.Name}";
             Notes = SelectedProject.Notes;
@@ -66,7 +66,7 @@ namespace PracticePanther.maui.ViewModels
         public DateTime? ProjectsCloseDate { get; set; }
         public string ProjectsCloseDateFormat { get { return SelectedProject.IsActive ? "N.A." : ProjectsCloseDate?.ToString("MM/dd/yyyy"); } }
 
-        public List<Client> AssociatedClients { get; set; }
+        public ObservableCollection<Client> AssociatedClients { get; set; }
         public int AssociatedID { get; set; }
         public string UpdateTitle { get; set; }
         public string Notes { get; set; }
@@ -87,7 +87,7 @@ namespace PracticePanther.maui.ViewModels
             if (IsEnabled)
                 SelectedProject.CloseDate = ProjectsCloseDate;
 
-            SelectedProject.Clients = AssociatedClients;
+            SelectedProject.Clients = AssociatedClients.ToList();
 
             SelectedProject.Notes = Notes;
         }
@@ -96,17 +96,17 @@ namespace PracticePanther.maui.ViewModels
         {
             get
             {
-                if (AssociatedClients == null)
-                    return "Not Assigned";
+                if (AssociatedClients == null || AssociatedClients.Count == 0)
+                    return "No clients assigned.";
 
                 string NameOfProjects = string.Empty;
 
                 foreach (Client clients in AssociatedClients)
                 {
-                    NameOfProjects += clients.Name + " ";
+                    NameOfProjects += clients.Name + ", ";
                 }
 
-                return NameOfProjects;
+                return NameOfProjects.Remove(NameOfProjects.Count() - 2);
             }
         }
 

@@ -48,7 +48,7 @@ namespace PracticePanther.maui.ViewModels
 
         public string ProjectNameDetail { get
             {
-                if (SelectedProjects == null)
+                if (SelectedProjects == null || SelectedProjects.Count == 0)
                     return "No projects assigned.";
 
                 string ProjectMSG = string.Empty;
