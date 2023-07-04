@@ -35,7 +35,8 @@ namespace PracticePanther.maui.ViewModels
                 Activity = "InActive";
 
             SelectedProjects = new ObservableCollection<Project>(SelectedClient.Project);
-            ShowedProjects = new ObservableCollection<object>(SelectedClient.Project);
+            //ShowedProjects = new ObservableCollection<object>(SelectedClient.Project);
+            NotifyPropertyChanged(nameof(SelectedProjects));
             NotifyPropertyChanged(nameof(ShowedProjects));
 
             UpdateTitle = $"Updating {SelectedClient.Name}";
@@ -59,10 +60,15 @@ namespace PracticePanther.maui.ViewModels
                 return ProjectMSG.Remove(ProjectMSG.Count() - 3);
             } }
 
-        private ObservableCollection<object> ShowedProjects;
+        private List<object> ShowedProjects { 
+            get { 
+                return SelectedProjects.Select(p => p as object).ToList();
+            } 
+        }
         private ObservableCollection<Project> selectedProjects;
         public ObservableCollection<Project> SelectedProjects
-        { get { return selectedProjects; }
+        { 
+            get { return selectedProjects; }
             set
             {
                 if (selectedProjects != value)
