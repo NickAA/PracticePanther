@@ -53,6 +53,7 @@
                 </Picker>
             </Grid>
 
+            <Label Text="Select Projects to associate with Client" Grid.Row="2" Margin="0, -18, 0, 0"/>
             <CollectionView ItemsSource="{Binding Path=AvaliableProjects}"
                             SelectionMode="Multiple" Grid.Row="2" EmptyView="No Projects Available"
                             SelectionChanged="CollectionView_SelectionChanged" SelectedItems="{Binding Path=ShowedProjects, Mode=TwoWay}"/>

@@ -53,9 +53,10 @@
                 </Picker>
             </Grid>
 
+            <Label Text="Select Clients to associate project with" Margin="0, -18, 0, 0" Grid.Row="2"/>
             <CollectionView ItemsSource="{Binding Path=AvaliableClients}" SelectionChanged="ClientsSelectionChanged"
                             SelectionMode="Multiple" Grid.Row="2" EmptyView="No Clients Available"
-                            SelectedItems="{Binding Path=AssociatedProject}"/>
+                            SelectedItems="{Binding Path=AssociatedClients}"/>
 
             <Label Text="Edit Notes" Grid.Row="3"/>
             <Editor Text="{Binding Path=Notes}" Grid.Row="3" Margin="0, 20, 0, -80" AutoSize="TextChanges"/>

@@ -36,8 +36,8 @@ namespace PracticePanther.maui.ViewModels
 
             SelectedProjects = new ObservableCollection<Project>(SelectedClient.Project);
             //ShowedProjects = new ObservableCollection<object>(SelectedClient.Project);
-            NotifyPropertyChanged(nameof(SelectedProjects));
-            NotifyPropertyChanged(nameof(ShowedProjects));
+            //NotifyPropertyChanged(nameof(SelectedProjects));
+            //NotifyPropertyChanged(nameof(ShowedProjects));
 
             UpdateTitle = $"Updating {SelectedClient.Name}";
             Notes = SelectedClient.Notes;
@@ -60,11 +60,13 @@ namespace PracticePanther.maui.ViewModels
                 return ProjectMSG.Remove(ProjectMSG.Count() - 3);
             } }
 
-        private List<object> ShowedProjects { 
-            get { 
-                return SelectedProjects.Select(p => p as object).ToList();
-            } 
-        }
+        //private List<object> ShowedProjects { 
+        //    get { 
+        //        return SelectedProjects.Select(p => p as object).ToList();
+        //    } 
+        //}
+
+
         private ObservableCollection<Project> selectedProjects;
         public ObservableCollection<Project> SelectedProjects
         { 
