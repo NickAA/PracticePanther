@@ -52,7 +52,7 @@ namespace Panther.Library.Services
                 if (times.Exists(c => c.employee == e))
                     ContainTimes.AddRange(times.Where(c => c.employee == e).ToList());
 
-            return ContainTimes;
+            return ContainTimes.Distinct().ToList();
         }
 
         public void RemoveTime(Time DeleteTime)
