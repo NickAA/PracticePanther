@@ -11,7 +11,7 @@ namespace Panther.Library.Models
     public class Time
     {
 
-        public Time (DateTime entry, int hours, Project pId, Employee eId)
+        public Time (DateTime entry, int? hours, Project pId, Employee eId)
         {
             DateEntry = entry;
             Hours = hours;
@@ -27,7 +27,7 @@ namespace Panther.Library.Models
         public string DateDisplay { get {  return DateEntry.ToString("MM/dd/yyyy"); } }
         public string Narrative { get; set; }
 
-        public int Hours { get; set; }
+        public int? Hours { get; set; }
         public string HoursDisplay { get { return Hours.ToString(); } }
 
         public int ProjectId { get { return project.Id; } }

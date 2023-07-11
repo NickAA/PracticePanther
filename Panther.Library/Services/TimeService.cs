@@ -35,7 +35,7 @@ namespace Panther.Library.Services
             }
         }
 
-        public bool AddTime (DateTime entry, int hours, Project pId, Employee eId)
+        public bool AddTime (DateTime entry, int? hours, Project pId, Employee eId)
         {
             times.Add(new Time(entry, hours, pId, eId));
             return true;
@@ -57,5 +57,9 @@ namespace Panther.Library.Services
 
         public void RemoveTime(Time DeleteTime)
         { times.Remove(DeleteTime); }
+
+        public Time FindTime(int ID)
+        { return times.FirstOrDefault(c => c.Id == ID); }
+
     }
 }

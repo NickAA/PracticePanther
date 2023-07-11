@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PracticePanther.maui.Views.UpdateTime"
+             Title="UpdateTime"
+             NavigatedFrom="OnLeaving"
+             NavigatedTo="OnArriving">
+    <ScrollView>
+        <VerticalStackLayout Spacing="25"
+                             Padding="500, 0"
+                             VerticalOptions="Center">
+
+
+            <Label Text="{Binding Path=AddedTime}" HorizontalOptions="Center"/>
+
+            <Grid HeightRequest="150">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <CollectionView ItemsSource="{Binding Path=AvaliableEmployees}" Grid.Column="1" SelectedItem="{Binding Path=SelectedEmployee}" SelectionMode="Single"/>
+                <CollectionView ItemsSource="{Binding Path=AvaliableProjects}" Grid.Column="2" SelectedItem="{Binding Path=SelectedProject}" SelectionMode="Single"/>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Entry Placeholder="Enter Hours" Keyboard="Numeric" Text="{Binding Path=AddedHours, Mode=TwoWay}" Grid.Column="1"/>
+                <DatePicker Date="{Binding Path=Time}" Grid.Column="3"/>
+            </Grid>
+            <Grid HeightRequest="200">
+                <Editor Placeholder="Narrative" Text="{Binding Path=Narrative}"/>
+            </Grid>
+
+            <Button Text="Save Time Entry" Clicked="SaveTime"/>
+
+            <Button Text="Return to Time Menu" Clicked="TimeMenu"/>
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

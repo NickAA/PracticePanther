@@ -34,7 +34,7 @@ public partial class TimeMenu : ContentPage
         if ((BindingContext as TimeViewModel).SelectedTime != null)
         {
             var timeID = (BindingContext as TimeViewModel).SelectedTime.Id;
-            Shell.Current.GoToAsync($"//UpdateProject?projectsid={timeID}");
+            Shell.Current.GoToAsync($"//UpdateTime?timeid={timeID}");
         }
     }
 
@@ -53,7 +53,7 @@ public partial class TimeMenu : ContentPage
         if ((BindingContext as TimeViewModel).SelectedTime != null)
         {
             var timeID = (BindingContext as TimeViewModel).SelectedTime.Id;
-            Shell.Current.GoToAsync($"//ProjectDetails?projectsid={timeID}");
+            Shell.Current.GoToAsync($"//TimeView?timeid={timeID}");
         }
     }
 }

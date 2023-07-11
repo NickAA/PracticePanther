@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PracticePanther.maui.Views.TimeView"
+             Title="TimeView"
+             NavigatedFrom="OnLeaving"
+             NavigatedTo="OnArriving">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+            <Label FontSize="Subtitle" Text="{Binding Path=SelectedEmployee, StringFormat='Employee: {0}'}" Grid.Row="0" HorizontalOptions="Center"/>
+        <Label FontSize="Subtitle" Text="{Binding Path=SelectedProject, StringFormat='Project worked on: {0}'}" Grid.Row="1" HorizontalOptions="Center"/>
+
+
+        <Label FontSize="Subtitle" Text="{Binding Path=AddedHours, StringFormat='Hours worked: {0}'}" Grid.Row="2" HorizontalOptions="Center"/>
+
+        <Label Text="Narrative" Grid.Row="3" FontSize="Subtitle" HorizontalOptions="Center"/>
+        <Label Text="{Binding Path=Narrative}" Grid.Row="3" Margin="0, 25, 0, -80" HorizontalOptions="Center"/>
+
+        <Button Text="Time Menu" Clicked="TimeMenu" Grid.Row="4" WidthRequest="800"/>
+
+
+    </Grid>
+</ContentPage>

@@ -47,7 +47,7 @@
 
                 <!--changed SelectedProject to SelectedTimes when done-->
                 <ListView ItemsSource="{Binding Path=Times, Mode=TwoWay}" Grid.Row="1"
-                          SelectedItem="{Binding Path=SelectedTimes, Mode=TwoWay}">
+                          SelectedItem="{Binding Path=SelectedTime, Mode=TwoWay}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>

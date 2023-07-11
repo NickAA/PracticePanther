@@ -24,10 +24,19 @@ namespace PracticePanther.maui.ViewModels
             AvaliableProjects = ProjectService.Current.projects;
             Time = DateTime.Today;
         }
-
         public List<Employee> AvaliableEmployees { get; set; }
         public List<Project> AvaliableProjects { get; set; }
-
+        public TimeViewModel(int TimeID)
+        {
+            AvaliableEmployees = EmployeeService.Current.employees;
+            AvaliableProjects = ProjectService.Current.projects;
+            SelectedTime = TimeService.Current.FindTime(TimeID);
+            AddedHours = SelectedTime.Hours;
+            Time = SelectedTime.DateEntry;
+            SelectedProject = SelectedTime.project;
+            SelectedEmployee = SelectedTime.employee;
+            Narrative = SelectedTime.Narrative;
+        }
 
         public ObservableCollection<Time> Times
         {
@@ -60,14 +69,14 @@ namespace PracticePanther.maui.ViewModels
 
         public void Add()
         {
-            if (SelectedEmployee == null || SelectedProject == null || AddedHours == 0)
+            if (SelectedEmployee == null || SelectedProject == null || AddedHours == null)
                 return;
 
             TimeService.Current.AddTime(Time, AddedHours, SelectedProject, SelectedEmployee);
 
             AddedTime = $"{SelectedEmployee} clocked {SelectedProject} for {AddedHours} hours";
             Time = DateTime.Today;
-            AddedHours = 0;
+            AddedHours = null;
             SelectedProject = null;
             SelectedEmployee = null;
             NotifyPropertyChanged(nameof(AddedTime));
@@ -78,10 +87,19 @@ namespace PracticePanther.maui.ViewModels
         }
         public string AddedTime { get; set; }
         public DateTime Time { get; set; }
-        public int AddedHours { get; set; }
+        public int? AddedHours { get; set; }
         public Employee SelectedEmployee { get; set; }
         public Project SelectedProject { get; set; }
 
+        public void Save()
+        {
+            SelectedTime.Hours = AddedHours;
+            SelectedTime.DateEntry = Time;
+            SelectedTime.project = SelectedProject;
+            SelectedTime.employee = SelectedEmployee;
+            SelectedTime.Narrative = Narrative;
+        }
+        public string Narrative { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
