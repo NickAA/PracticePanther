@@ -38,7 +38,7 @@ public partial class UpdateClient : ContentPage
     private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var value = new ObservableCollection<Project>((e.CurrentSelection).Select(o => (o as Project)).Where(t => t != null));
-        if (ClientsId != 0 && e.CurrentSelection.Count != 0)
+        if (ClientsId != 0)
             (BindingContext as ClientViewModel).SelectedProjects = value;
     }
 }

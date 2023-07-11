@@ -42,7 +42,7 @@
                 <Label Grid.Column="2" Text="Close Date" Padding="0, 0, 0, 0"/>
                 <DatePicker Grid.Column="2" IsEnabled="{Binding Path=IsEnabled}" Date="{Binding Path=ClientsCloseDate}"/>
 
-                <Picker Title="Select Activity" Grid.Column="0"
+                <Picker Title="Select Activity" Grid.Column="0" IsEnabled="{Binding Path=CheckProjects}"
                     SelectedItem="{Binding Path=Activity}" SelectedIndex="1">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">

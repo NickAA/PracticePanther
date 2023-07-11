@@ -34,8 +34,9 @@ namespace PracticePanther.maui.ViewModels
             else
                 Activity = "InActive";
 
-            SelectedProjects = new ObservableCollection<Project>(SelectedClient.Project);
-            //ShowedProjects = new ObservableCollection<object>(SelectedClient.Project);
+            SelectedProjects = new ObservableCollection<Project>();
+            //SelectedProjects = new ObservableCollection<Project>(SelectedClient.Project);
+            AssociatedProjects = new ObservableCollection<Project>(SelectedClient.Project);
             //NotifyPropertyChanged(nameof(SelectedProjects));
             //NotifyPropertyChanged(nameof(ShowedProjects));
 
@@ -49,22 +50,18 @@ namespace PracticePanther.maui.ViewModels
 
         public string ProjectNameDetail { get
             {
-                if (SelectedProjects == null || SelectedProjects.Count == 0)
+                if (AssociatedProjects == null || AssociatedProjects.Count == 0)
                     return "No projects assigned.";
 
                 string ProjectMSG = string.Empty;
 
-                foreach (Project c in SelectedProjects)
+                foreach (Project c in AssociatedProjects)
                     ProjectMSG += $"{c.Name}, ";
 
                 return ProjectMSG.Remove(ProjectMSG.Count() - 3);
             } }
 
-        //private List<object> ShowedProjects { 
-        //    get { 
-        //        return SelectedProjects.Select(p => p as object).ToList();
-        //    } 
-        //}
+        public ObservableCollection<Project> AssociatedProjects { get; set; }
 
 
         private ObservableCollection<Project> selectedProjects;
@@ -99,7 +96,21 @@ namespace PracticePanther.maui.ViewModels
         public ObservableCollection<object> AvaliableProjects { get; set; }
 
         private string activity;
-        public string Activity { get { return activity; } 
+        public string Activity { get 
+            {
+                if (SelectedClient.Project == null || SelectedClient.Project.Count == 0)
+                    CheckProjects = true;
+
+                foreach (Project p in SelectedClient.Project)
+                    if (p.IsActive == true)
+                        CheckProjects = false;
+
+                if (CheckProjects != false)
+                    CheckProjects = true;
+                NotifyPropertyChanged(nameof(CheckProjects));
+
+                return activity; 
+            } 
             set 
             {
                 activity = value;
@@ -112,6 +123,8 @@ namespace PracticePanther.maui.ViewModels
                 NotifyPropertyChanged("IsEnabled");
             }
         }
+
+        public bool CheckProjects { get; set; }
 
         public bool IsEnabled { get; set; }
 
@@ -158,8 +171,12 @@ namespace PracticePanther.maui.ViewModels
 
         public void Delete()
         {
-            if (SelectedClient == null || SelectedClient.Project.Count != 0)
+            if (SelectedClient == null)
                 return;
+
+            foreach (Project p in SelectedClient.Project)
+                if (p.IsActive == true)
+                    return;
 
             ClientService.Current.RemoveClient(SelectedClient);
             // Works now
@@ -172,16 +189,21 @@ namespace PracticePanther.maui.ViewModels
             UpdateTitle = $"Updating {SelectedClient.Name}";
             NotifyPropertyChanged("UpdateTitle");
 
+            SelectedClient.OpenDate = ClientsOpenDate;
+            if (IsEnabled)
+                SelectedClient.CloseDate = ClientsCloseDate;
+
+            if (SelectedProjects != null)
+                SelectedClient.Project = SelectedProjects.ToList();
+            else
+                SelectedClient.Project.Clear();
+
             if (Activity == "Active")
                 SelectedClient.IsActive = true;
             else
                 SelectedClient.IsActive = false;
 
-            SelectedClient.OpenDate = ClientsOpenDate;
-            if (IsEnabled)
-                SelectedClient.CloseDate = ClientsCloseDate;
-
-            SelectedClient.Project = SelectedProjects.ToList();
+            NotifyPropertyChanged(nameof(CheckProjects));
 
             SelectedClient.Notes = Notes;
         }
