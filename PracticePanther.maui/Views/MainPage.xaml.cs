@@ -25,5 +25,10 @@ namespace PracticePanther.maui
         {
             Shell.Current.GoToAsync("//Employee");
         }
+
+        private void TimeMenuClicked(object sender, EventArgs e)
+        {
+            Shell.Current.GoToAsync("//Time");
+        }
     }
 }

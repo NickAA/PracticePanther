@@ -1,5 +1,6 @@
 ﻿using Panther.Library.Models;
 using Panther.Library.Services;
+using PracticePanther.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,9 +18,16 @@ namespace PracticePanther.maui.ViewModels
         {
             if (NewTime)
             {
-                //NotifyProp
+                NotifyPropertyChanged(nameof(Times));
             }
+            AvaliableEmployees = EmployeeService.Current.employees;
+            AvaliableProjects = ProjectService.Current.projects;
+            Time = DateTime.Today;
         }
+
+        public List<Employee> AvaliableEmployees { get; set; }
+        public List<Project> AvaliableProjects { get; set; }
+
 
         public ObservableCollection<Time> Times
         {
@@ -34,6 +42,45 @@ namespace PracticePanther.maui.ViewModels
 
         public string Query { get; set; }
 
+        public void Search()
+        {
+            NotifyPropertyChanged(nameof(Times));
+        }
+
+        public void Delete()
+        {
+            if (SelectedTime == null)
+                return;
+
+            TimeService.Current.RemoveTime(SelectedTime);
+            NotifyPropertyChanged(nameof(Times));
+        }
+
+        public Time SelectedTime { get; set; }
+
+        public void Add()
+        {
+            if (SelectedEmployee == null || SelectedProject == null || AddedHours == 0)
+                return;
+
+            TimeService.Current.AddTime(Time, AddedHours, SelectedProject, SelectedEmployee);
+
+            AddedTime = $"{SelectedEmployee} clocked {SelectedProject} for {AddedHours} hours";
+            Time = DateTime.Today;
+            AddedHours = 0;
+            SelectedProject = null;
+            SelectedEmployee = null;
+            NotifyPropertyChanged(nameof(AddedTime));
+            NotifyPropertyChanged(nameof(Time));
+            NotifyPropertyChanged(nameof(AddedHours));
+            NotifyPropertyChanged(nameof(SelectedEmployee));
+            NotifyPropertyChanged(nameof(SelectedProject));
+        }
+        public string AddedTime { get; set; }
+        public DateTime Time { get; set; }
+        public int AddedHours { get; set; }
+        public Employee SelectedEmployee { get; set; }
+        public Project SelectedProject { get; set; }
 
 
         public event PropertyChangedEventHandler PropertyChanged;

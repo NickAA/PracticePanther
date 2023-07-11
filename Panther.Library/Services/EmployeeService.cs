@@ -16,7 +16,7 @@ namespace Panther.Library.Services
             AddEmployee("Penelope Sosa", 2.99);
         }
 
-        private List<Employee> employees;
+        public List<Employee> employees;
         public List<Employee> Employees
         { get { return employees; } }
 

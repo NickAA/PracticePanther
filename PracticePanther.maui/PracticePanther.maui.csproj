@@ -90,6 +90,9 @@
 	  <MauiXaml Update="Views\ProjectViews\UpdateProject.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\TimeViews\CreateTimeView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\TimeViews\TimeMenu.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

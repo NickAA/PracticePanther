@@ -66,5 +66,17 @@
         ContentTemplate="{DataTemplate local2:UpdateEmployee}"
         Route="UpdateEmployee"
         />
+    
+    <!--Time Views-->
+    <ShellContent
+        Title="Time Menu"
+        ContentTemplate="{DataTemplate local2:TimeMenu}"
+        Route="Time"
+        />
+    <ShellContent
+        Title="Create Time"
+        ContentTemplate="{DataTemplate local2:CreateTimeView}"
+        Route="NewTime"
+        />
 
 </Shell>

@@ -1,4 +1,5 @@
-﻿using PracticePanther.Models;
+﻿using Panther.Library.Services;
+using PracticePanther.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,23 +11,28 @@ namespace Panther.Library.Models
     public class Time
     {
 
-        public Time (DateTime entry, string narr, int hours, int pId, int eId)
+        public Time (DateTime entry, int hours, Project pId, Employee eId)
         {
             DateEntry = entry;
-            Narrative = narr;
             Hours = hours;
-            pId = ProjectId;
-            eId = EmployeeId;
+            project = pId;
+            employee = eId;
+            Id = ++NumberTimes;
         }
 
+        private static int NumberTimes = 0;
+        public int Id; 
+
         public DateTime DateEntry { get; set; }
-        public string DateDisplay { get {  return DateEntry.ToString(); } }
+        public string DateDisplay { get {  return DateEntry.ToString("MM/dd/yyyy"); } }
         public string Narrative { get; set; }
 
         public int Hours { get; set; }
         public string HoursDisplay { get { return Hours.ToString(); } }
 
-        public int ProjectId { get; set; }
-        public int EmployeeId { get; set; }
+        public int ProjectId { get { return project.Id; } }
+        public Project project { get; set; }
+        public int EmployeeId { get { return employee.Id; } }
+        public Employee employee { get; set; }
     }
 }

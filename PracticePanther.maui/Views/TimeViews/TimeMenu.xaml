@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PracticePanther.maui.Views.TimeViews.TimeMenu"
+             x:Class="PracticePanther.maui.Views.TimeMenu"
              Title="TimeMenu"
              NavigatedFrom="OnLeaving"
              NavigatedTo="OnArriving">
@@ -21,7 +21,7 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <Entry Text="{Binding Path=Query}" Completed="SearchClicked" Grid.Column="0"></Entry>
+                <Entry Text="{Binding Path=Query}" Completed="SearchClicked" Grid.Column="0"/>
                 <Button Grid.Column="1" Text="Search" Clicked="SearchClicked"></Button>
             </Grid>
 
@@ -35,37 +35,33 @@
                 <Grid Grid.Row="0" VerticalOptions="End">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Text="ID"/>
-                    <Label Grid.Column="1" Text="Name"/>
-                    <Label Grid.Column="2" Text="Activity"/>
-                    <Label Grid.Column="3" Text="Associated Clients"/>
-                    <Label Grid.Column="4" Text="Opening date"/>
+                    <Label Grid.Column="0" Text="Employee"/>
+                    <Label Grid.Column="1" Text="Project"/>
+                    <Label Grid.Column="2" Text="Hours"/>
+                    <Label Grid.Column="3" Text="Entry"/>
                 </Grid>
 
-                <!--changed SelectedProject to selectedproject when done-->
-                <ListView ItemsSource="{Binding Path=Projects, Mode=TwoWay}" Grid.Row="1"
-                          SelectedItem="{Binding Path=SelectedProject, Mode=TwoWay}">
+                <!--changed SelectedProject to SelectedTimes when done-->
+                <ListView ItemsSource="{Binding Path=Times, Mode=TwoWay}" Grid.Row="1"
+                          SelectedItem="{Binding Path=SelectedTimes, Mode=TwoWay}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="2*"/>
-                                        <ColumnDefinition Width="3*"/>
-                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="2*"/>
                                         <ColumnDefinition Width="3*"/>
                                         <ColumnDefinition Width="3*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="0" Text="{Binding Path=IdDisplay}"/>
-                                    <Label Grid.Column="1" Text="{Binding Path=Name}"/>
-                                    <Label Grid.Column="2" Text="{Binding Path=ActiveDisplay}"/>
-                                    <Label Grid.Column="3" Text="{Binding Path=ClientName}"/>
-                                    <Label Grid.Column="4" Text="{Binding Path=OpeningDate}"/>
+                                    <Label Grid.Column="0" Text="{Binding Path=employee}"/>
+                                    <Label Grid.Column="1" Text="{Binding Path=project}"/>
+                                    <Label Grid.Column="2" Text="{Binding Path=HoursDisplay}"/>
+                                    <Label Grid.Column="3" Text="{Binding Path=DateDisplay}"/>
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
@@ -84,16 +80,12 @@
                     <ColumnDefinition Width="0.40*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Text="Create" Grid.Column="0" Clicked="NewClientClicked"></Button>
-                <Button Text="Update" Clicked="UpdateClient" Grid.Column="1"></Button>
-                <Button Text="Info" Grid.Column="2" Clicked="ClientDetailsClicked"></Button>
-                <Button Text="Delete" Grid.Column="3" Background="Red" Clicked="DeleteClicked"></Button>
-                <Button Text="Main Menu" Grid.Column="4" Clicked="ToMainMenu"></Button>
+                <Button Text="Create" Grid.Column="0" Clicked="NewTimeClicked"/>
+                <Button Text="Update" Clicked="UpdateTime" Grid.Column="1"/>
+                <Button Text="Info" Grid.Column="2" Clicked="TimeDetailsClicked"/>
+                <Button Text="Delete" Grid.Column="3" Background="Red" Clicked="DeleteClicked"/>
+                <Button Text="Main Menu" Grid.Column="4" Clicked="ToMainMenu"/>
             </Grid>
-
-
-
-
         </Grid>
     </ScrollView>
 </ContentPage>

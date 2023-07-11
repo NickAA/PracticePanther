@@ -13,6 +13,7 @@ namespace Panther.Library.Services
         private TimeService()
         {
             times = new List<Time>();
+            AddTime(DateTime.Today, 51, ProjectService.Current.projects.First(), EmployeeService.Current.employees.Last() );
         }
 
         public List<Time> times;
@@ -34,9 +35,9 @@ namespace Panther.Library.Services
             }
         }
 
-        public bool AddTime (DateTime entry, string narr, int hours, int pId, int eId)
+        public bool AddTime (DateTime entry, int hours, Project pId, Employee eId)
         {
-            times.Add(new Time(entry, narr, hours, pId, eId));
+            times.Add(new Time(entry, hours, pId, eId));
             return true;
         }
 
@@ -44,14 +45,17 @@ namespace Panther.Library.Services
         {
             List<Time> ContainTimes = new List<Time>();
             foreach (Project p in ProjectService.Current.Search(query))
-                if (times.Exists(c => c.ProjectId == p.Id))
-                    ContainTimes.AddRange(times.Where(c => c.ProjectId == p.Id).ToList());
+                if (times.Exists(c => c.project == p))
+                    ContainTimes.AddRange(times.Where(c => c.project == p).ToList());
 
             foreach (Employee e in EmployeeService.Current.Search(query))
-                if (times.Exists(c => c.EmployeeId == e.Id))
-                    ContainTimes.AddRange(times.Where(c => c.EmployeeId == e.Id).ToList());
+                if (times.Exists(c => c.employee == e))
+                    ContainTimes.AddRange(times.Where(c => c.employee == e).ToList());
 
             return ContainTimes;
         }
+
+        public void RemoveTime(Time DeleteTime)
+        { times.Remove(DeleteTime); }
     }
 }

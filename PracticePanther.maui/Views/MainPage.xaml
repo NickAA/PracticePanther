@@ -8,11 +8,13 @@
                              Padding="500, 0"
                              VerticalOptions="Center">
 
-            <Button Text="Client Menu" Clicked="ClientMenuClicked"></Button>
+            <Button Text="Client Menu" Clicked="ClientMenuClicked"/>
 
-            <Button Text="Project Menu" Clicked="ProjectMenuClicked"></Button>
+            <Button Text="Project Menu" Clicked="ProjectMenuClicked"/>
 
             <Button Text="Employee Menu" Clicked="EmployeeMenuClicked"/>
+
+            <Button Text="Time Menu" Clicked="TimeMenuClicked"/>
 
         </VerticalStackLayout>
         
