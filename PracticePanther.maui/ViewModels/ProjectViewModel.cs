@@ -107,7 +107,7 @@ namespace PracticePanther.maui.ViewModels
 
                 string NameOfProjects = string.Empty;
 
-                foreach (Client clients in SelectedProject.Clients)
+                foreach (Client clients in SelectedProject.Clients.Distinct())
                 {
                     NameOfProjects += clients.Name + ", ";
                 }
@@ -133,6 +133,9 @@ namespace PracticePanther.maui.ViewModels
         {
             if (SelectedProject == null)
                 return;
+
+            foreach (Client c in SelectedProject.Clients)
+                c.Project.Remove(SelectedProject);
 
             ProjectService.Current.RemoveProject(SelectedProject);
             // Works now

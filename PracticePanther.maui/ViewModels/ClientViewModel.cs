@@ -55,7 +55,7 @@ namespace PracticePanther.maui.ViewModels
 
                 string ProjectMSG = string.Empty;
 
-                foreach (Project c in AssociatedProjects)
+                foreach (Project c in AssociatedProjects.Distinct())
                     ProjectMSG += $"{c.Name}, ";
 
                 return ProjectMSG.Remove(ProjectMSG.Count() - 2);
@@ -181,6 +181,9 @@ namespace PracticePanther.maui.ViewModels
                 if (p.IsActive == true)
                     return;
 
+            foreach (Project p in SelectedClient.Project)
+                p.Clients.Remove(SelectedClient);
+
             ClientService.Current.RemoveClient(SelectedClient);
             // Works now
             NotifyPropertyChanged("Clients");
@@ -199,6 +202,8 @@ namespace PracticePanther.maui.ViewModels
             if (SelectedProjects != null)
             {
                 SelectedClient.Project = SelectedProjects.ToList();
+                Activity = "Active";
+                NotifyPropertyChanged(nameof(Activity));
 
                 foreach (Project p in SelectedClient.Project)
                     p.Clients.Add(SelectedClient);
