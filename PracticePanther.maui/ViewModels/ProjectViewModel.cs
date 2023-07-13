@@ -102,12 +102,12 @@ namespace PracticePanther.maui.ViewModels
         {
             get
             {
-                if (AssociatedClients == null || AssociatedClients.Count == 0)
+                if (SelectedProject.Clients == null || SelectedProject.Clients.Count == 0)
                     return "No clients assigned.";
 
                 string NameOfProjects = string.Empty;
 
-                foreach (Client clients in AssociatedClients)
+                foreach (Client clients in SelectedProject.Clients)
                 {
                     NameOfProjects += clients.Name + ", ";
                 }
