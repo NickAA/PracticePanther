@@ -38,7 +38,7 @@ public partial class UpdateProject : ContentPage
     private void ClientsSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         var value = new ObservableCollection<Client>((e.CurrentSelection).Select(o => (o as Client)).Where(t => t != null));
-        if (ProjectsId != 0 && e.CurrentSelection.Count != 0)
+        if (ProjectsId != 0)
             (BindingContext as ProjectViewModel).AssociatedClients = value;
     }
 }

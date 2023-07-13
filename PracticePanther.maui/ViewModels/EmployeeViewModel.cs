@@ -62,7 +62,7 @@ namespace PracticePanther.maui.ViewModels
 
         public void Add ()
         {
-            if (NewEmployee == string.Empty || EmployeeRate == null)
+            if (NewEmployee == string.Empty || NewEmployee == null || EmployeeRate == null)
                 return;
 
             EmployeeService.Current.AddEmployee(NewEmployee, EmployeeRate);

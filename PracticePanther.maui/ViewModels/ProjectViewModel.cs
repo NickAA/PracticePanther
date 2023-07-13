@@ -33,7 +33,7 @@ namespace PracticePanther.maui.ViewModels
             else
                 Activity = "InActive";
 
-            AssociatedClients = new ObservableCollection<Client>(SelectedProject.Clients);
+            AssociatedClients = new ObservableCollection<Client>();
 
             UpdateTitle = $"Updating {SelectedProject.Name}";
             Notes = SelectedProject.Notes;
@@ -65,7 +65,8 @@ namespace PracticePanther.maui.ViewModels
         public string ProjectsOpenDateFormat { get { return ProjectsOpenDate.ToString("MM/dd/yyyy"); } }
         public DateTime? ProjectsCloseDate { get; set; }
         public string ProjectsCloseDateFormat { get { return SelectedProject.IsActive ? "N.A." : ProjectsCloseDate?.ToString("MM/dd/yyyy"); } }
-
+        
+        // nvm just needed it to be empty
         public ObservableCollection<Client> AssociatedClients { get; set; }
         public int AssociatedID { get; set; }
         public string UpdateTitle { get; set; }
@@ -87,7 +88,12 @@ namespace PracticePanther.maui.ViewModels
             if (IsEnabled)
                 SelectedProject.CloseDate = ProjectsCloseDate;
 
+            foreach(Client c in SelectedProject.Clients)
+                c.Project.Remove(SelectedProject);
             SelectedProject.Clients = AssociatedClients.ToList();
+            foreach (Client c in SelectedProject.Clients)
+                c.Project.Add(SelectedProject);
+
 
             SelectedProject.Notes = Notes;
         }

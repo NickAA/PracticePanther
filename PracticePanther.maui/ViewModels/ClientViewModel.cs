@@ -58,7 +58,7 @@ namespace PracticePanther.maui.ViewModels
                 foreach (Project c in AssociatedProjects)
                     ProjectMSG += $"{c.Name}, ";
 
-                return ProjectMSG.Remove(ProjectMSG.Count() - 3);
+                return ProjectMSG.Remove(ProjectMSG.Count() - 2);
             } }
 
         public ObservableCollection<Project> AssociatedProjects { get; set; }
@@ -104,9 +104,12 @@ namespace PracticePanther.maui.ViewModels
                 foreach (Project p in SelectedClient.Project)
                     if (p.IsActive == true)
                         CheckProjects = false;
+                    else
+                    {
+                        CheckProjects = true;
+                        break;
+                    }
 
-                if (CheckProjects != false)
-                    CheckProjects = true;
                 NotifyPropertyChanged(nameof(CheckProjects));
 
                 return activity; 
@@ -194,9 +197,18 @@ namespace PracticePanther.maui.ViewModels
                 SelectedClient.CloseDate = ClientsCloseDate;
 
             if (SelectedProjects != null)
+            {
                 SelectedClient.Project = SelectedProjects.ToList();
+
+                foreach (Project p in SelectedClient.Project)
+                    p.Clients.Add(SelectedClient);
+            }
             else
+            {
+                foreach (Project p in SelectedClient.Project)
+                    p.Clients.Remove(SelectedClient);
                 SelectedClient.Project.Clear();
+            }
 
             if (Activity == "Active")
                 SelectedClient.IsActive = true;
