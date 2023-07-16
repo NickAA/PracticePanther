@@ -88,5 +88,12 @@
         ContentTemplate="{DataTemplate local2:TimeView}"
         Route="TimeView"
         />
+    
+    <!--Bill Views-->
+    <ShellContent
+        Title="Bills Menu"
+        ContentTemplate="{DataTemplate local2:BillsMenu}"
+        Route="Bills"
+        />
 
 </Shell>

@@ -15,6 +15,8 @@
             <Button Text="Employee Menu" Clicked="EmployeeMenuClicked"/>
 
             <Button Text="Time Menu" Clicked="TimeMenuClicked"/>
+            
+            <Button Text="Bills Menu" Clicked="Button_Clicked"/>
 
         </VerticalStackLayout>
         

@@ -30,5 +30,10 @@ namespace PracticePanther.maui
         {
             Shell.Current.GoToAsync("//Time");
         }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            Shell.Current.GoToAsync("//Bills");
+        }
     }
 }

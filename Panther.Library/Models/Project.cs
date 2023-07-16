@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Panther.Library.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace PracticePanther.Models
             IsActive = true;
             Id = ++ProjectsCreated;
             Clients = new List<Client>();
+            Bills = new List<Bill>();
         }
 
         public int Id { get; set; }
@@ -41,5 +43,7 @@ namespace PracticePanther.Models
 
         public override string ToString()
         { return $"{Name}"; }
+
+        public List<Bill> Bills { get; set; }
     }
 }
