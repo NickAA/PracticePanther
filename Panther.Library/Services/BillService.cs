@@ -33,12 +33,25 @@ namespace Panther.Library.Services
             }
         }
 
+        public Bill Find(int id)
+        { return bills.Find(b => b.ID == id); }
 
         public void addBill(Project p, DateTime d, double a)
         {
             bills.Add(new Bill(p, d, a));
             // Assigned recently created bill to project
             ProjectService.Current.FindProject(p.Id).Bills.Add(bills.Last());
+        }
+
+        public void saveBill(Project p, DateTime d, double a, Bill BillChanging)
+        {
+            ProjectService.Current.FindProject(BillChanging.ProjectAssociated.Id).Bills.Remove(BillChanging);
+
+            BillChanging.AmountOwed = a;
+            BillChanging.ProjectAssociated = p;
+            BillChanging.DueDate = d;
+
+            ProjectService.Current.FindProject(BillChanging.ProjectAssociated.Id).Bills.Add(BillChanging);
         }
 
         public void removeBill(Bill b)

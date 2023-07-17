@@ -19,7 +19,17 @@ namespace PracticePanther.maui.ViewModels
             if (NewBills)
                 NotifyPropertyChanged(nameof(Bills));
 
+            SelectedDate = DateTime.Now;
             AvaliableProject = ProjectService.Current.projects;
+        }
+
+        public BillViewModel(int BillId)
+        {
+            AvaliableProject = ProjectService.Current.projects;
+            SelectedBill = BillService.Current.Find(BillId);
+            SelectedProject = SelectedBill.ProjectAssociated;
+            AmountInputted = SelectedBill.AmountOwedRounded;
+            SelectedDate = SelectedBill.DueDate;
         }
 
         public ObservableCollection<Bill> Bills
@@ -46,10 +56,27 @@ namespace PracticePanther.maui.ViewModels
 
         public void Add()
         {
-            if (SelectedProject != null && SelectedDate != null && ActualAmount != null)
+            if (SelectedProject != null && SelectedDate != null && ActualAmount != 0 && ActualAmount != null)
             {
                 BillService.Current.addBill(SelectedProject, SelectedDate.Value, ActualAmount.Value);
                 AddedBill = $"{SelectedProject} has been billed ${ActualAmount} due on {SelectedDate.Value.ToString("MM/dd/yyyy")}";
+                NotifyPropertyChanged(nameof(AddedBill));
+                SelectedProject = null;
+                ActualAmount = null;
+                SelectedDate = DateTime.Now;
+                NotifyPropertyChanged(nameof(SelectedProject));
+                NotifyPropertyChanged(nameof(AmountInputted));
+                NotifyPropertyChanged(nameof(SelectedDate));
+            }
+        }
+
+        public void Save()
+        {
+            if (SelectedProject != null && SelectedDate != null && ActualAmount != 0 && ActualAmount != null)
+            {
+                BillService.Current.saveBill(SelectedProject, SelectedDate.Value, AmountInputted.Value, SelectedBill);
+
+                AddedBill = $"{SelectedProject} is now billed ${ActualAmount} due on {SelectedDate.Value.ToString("MM/dd/yyyy")}";
                 NotifyPropertyChanged(nameof(AddedBill));
             }
         }
@@ -58,7 +85,14 @@ namespace PracticePanther.maui.ViewModels
         public Project SelectedProject { get; set; }
         public List<Project> AvaliableProject { get; set; }
         private double? ActualAmount { get; set; }
-        public double AmountInputted { set {  ActualAmount = double.Round(value, 2); } }
+        public double? AmountInputted 
+        { 
+            get { return ActualAmount == null ? null : ActualAmount.Value; } 
+            set {  
+                if (value != null)
+                    ActualAmount = double.Round((double)value, 2);
+            }
+        }
         public DateTime? SelectedDate { get; set; }
 
 

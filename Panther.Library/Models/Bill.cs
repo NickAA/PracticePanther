@@ -23,7 +23,7 @@ namespace Panther.Library.Models
         public Project ProjectAssociated { get; set; }
         public DateTime DueDate { get; set; }
         public string DueDateString { get {  return DueDate.ToString("MM/dd/yyyy"); } }
-        private double AmountOwed { get; set; }
+        public double AmountOwed { get; set; }
         public double AmountOwedRounded { get { return double.Round(AmountOwed, 2); } }
     }
 }

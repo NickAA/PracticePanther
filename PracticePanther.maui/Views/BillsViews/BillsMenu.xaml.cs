@@ -22,10 +22,10 @@ public partial class BillsMenu : ContentPage
     { Shell.Current.GoToAsync("//MainPage"); }
     private void UpdateBill(object sender, EventArgs e)
     {
-        if ((BindingContext as ClientViewModel).SelectedClient != null)
+        if ((BindingContext as BillViewModel).SelectedBill != null)
         {
             var billId = (BindingContext as BillViewModel).SelectedBill.ID;
-            Shell.Current.GoToAsync($"//UpdateClient?clientsid={billId}");
+            Shell.Current.GoToAsync($"//UpdateBill?billid={billId}");
         }
     }
 
