@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PracticePanther.maui.Views.CreateBill"
+             Title="CreateBill"             
+             NavigatedFrom="OnLeaving"
+             NavigatedTo="OnArriving">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="25"
+                             Padding="500, 0"
+                             VerticalOptions="Center">
+
+
+            <Label Text="{Binding Path=AddedBill}" HorizontalOptions="Center"/>
+
+            <Grid HeightRequest="150">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <CollectionView ItemsSource="{Binding Path=AvaliableProject}" Grid.Column="1" SelectedItem="{Binding Path=SelectedProject}" SelectionMode="Single"/>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Entry Placeholder="Enter Bill" Keyboard="Numeric" Text="{Binding Path=AmountInputted, Mode=TwoWay}" Grid.Column="1"/>
+                <DatePicker Date="{Binding Path=SelectedDate, Mode=TwoWay}" Grid.Column="2"/>
+            </Grid>
+
+
+            <Button Text="Add Bill Entry" Clicked="AddBill"/>
+
+            <Button Text="Return to Bill Menu" Clicked="BillMenu"/>
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

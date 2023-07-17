@@ -95,5 +95,11 @@
         ContentTemplate="{DataTemplate local2:BillsMenu}"
         Route="Bills"
         />
+    <ShellContent
+        Title="Create Bills"
+        ContentTemplate="{DataTemplate local2:CreateBill}"
+        Route="NewBill"
+        />
+
 
 </Shell>

@@ -74,8 +74,8 @@
                     <ColumnDefinition Width="0.40*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Text="Create" Grid.Column="0" Clicked="NewClientClicked"></Button>
-                <Button Text="Update" Clicked="UpdateClient" Grid.Column="1"></Button>
+                <Button Text="Create" Grid.Column="0" Clicked="NewBillClicked"></Button>
+                <Button Text="Update" Clicked="UpdateBill" Grid.Column="1"></Button>
                 <Button Text="Delete" Grid.Column="2" Background="Red" Clicked="DeleteClicked"></Button>
                 <Button Text="Main Menu" Grid.Column="3" Clicked="ToMainMenu"></Button>
             </Grid>

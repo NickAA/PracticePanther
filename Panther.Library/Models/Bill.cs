@@ -19,7 +19,7 @@ namespace Panther.Library.Models
         }
 
         private int BillsCreated = 0;
-        private int ID { get; set; }
+        public int ID { get; set; }
         public Project ProjectAssociated { get; set; }
         public DateTime DueDate { get; set; }
         public string DueDateString { get {  return DueDate.ToString("MM/dd/yyyy"); } }

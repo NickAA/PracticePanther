@@ -1,5 +1,6 @@
 ﻿using Panther.Library.Models;
 using Panther.Library.Services;
+using PracticePanther.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,6 +18,8 @@ namespace PracticePanther.maui.ViewModels
         {
             if (NewBills)
                 NotifyPropertyChanged(nameof(Bills));
+
+            AvaliableProject = ProjectService.Current.projects;
         }
 
         public ObservableCollection<Bill> Bills
@@ -37,13 +40,30 @@ namespace PracticePanther.maui.ViewModels
         {
             if (SelectedBill != null)
                 BillService.Current.removeBill(SelectedBill);
+
+            NotifyPropertyChanged(nameof(Bills));
         }
+
+        public void Add()
+        {
+            if (SelectedProject != null && SelectedDate != null && ActualAmount != null)
+            {
+                BillService.Current.addBill(SelectedProject, SelectedDate.Value, ActualAmount.Value);
+                AddedBill = $"{SelectedProject} has been billed ${ActualAmount} due on {SelectedDate.Value.ToString("MM/dd/yyyy")}";
+                NotifyPropertyChanged(nameof(AddedBill));
+            }
+        }
+
         public Bill SelectedBill { get; set; }
+        public Project SelectedProject { get; set; }
+        public List<Project> AvaliableProject { get; set; }
+        private double? ActualAmount { get; set; }
+        public double AmountInputted { set {  ActualAmount = double.Round(value, 2); } }
+        public DateTime? SelectedDate { get; set; }
 
 
 
-
-
+        public string AddedBill { set; get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")

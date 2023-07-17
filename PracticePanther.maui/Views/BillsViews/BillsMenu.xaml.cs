@@ -10,49 +10,28 @@ public partial class BillsMenu : ContentPage
 		BindingContext = new BillViewModel();
 	}
     private void SearchClicked(object sender, EventArgs e)
-    {
-        (BindingContext as BillViewModel).Search();
-    }
+    { (BindingContext as BillViewModel).Search(); }
 
     private void DeleteClicked(object sender, EventArgs e)
-    {
-        (BindingContext as BillViewModel).Delete();
-    }
+    { (BindingContext as BillViewModel).Delete(); }
 
-    private void NewClientClicked(object sender, EventArgs e)
-    {
-        Shell.Current.GoToAsync("//NewBill");
-    }
+    private void NewBillClicked(object sender, EventArgs e)
+    { Shell.Current.GoToAsync("//NewBill"); }
 
     private void ToMainMenu(object sender, EventArgs e)
-    {
-        Shell.Current.GoToAsync("//MainPage");
-    }
-    private void UpdateClient(object sender, EventArgs e)
+    { Shell.Current.GoToAsync("//MainPage"); }
+    private void UpdateBill(object sender, EventArgs e)
     {
         if ((BindingContext as ClientViewModel).SelectedClient != null)
         {
-            var clientsId = (BindingContext as ClientViewModel).SelectedClient.Id;
-            Shell.Current.GoToAsync($"//UpdateClient?clientsid={clientsId}");
+            var billId = (BindingContext as BillViewModel).SelectedBill.ID;
+            Shell.Current.GoToAsync($"//UpdateClient?clientsid={billId}");
         }
     }
 
     private void OnDeparting(object sender, NavigatedFromEventArgs e)
-    {
-        BindingContext = null;
-    }
+    { BindingContext = null; }
 
     private void OnArriving(object sender, NavigatedToEventArgs e)
-    {
-        BindingContext = new BillViewModel(true);
-    }
-
-    private void ClientDetailsClicked(object sender, EventArgs e)
-    {
-        if ((BindingContext as ClientViewModel).SelectedClient != null)
-        {
-            var clientsId = (BindingContext as ClientViewModel).SelectedClient.Id;
-            Shell.Current.GoToAsync($"//ClientDetails?clientsid={clientsId}");
-        }
-    }
+    { BindingContext = new BillViewModel(true); }
 }
