@@ -35,8 +35,7 @@ namespace Panther.Library.Services
         {
             if (Name != string.Empty)
             {
-                clients.Add(new Client());
-                clients.Last().Name = Name;
+                clients.Add(new Client(Name));
                 return true;
             }
 
@@ -44,9 +43,7 @@ namespace Panther.Library.Services
         }
 
         public void RemoveClient(Client ClientToDelete)
-        {
-            clients.Remove(ClientToDelete);
-        }
+        { clients.Remove(ClientToDelete); }
 
         public Client LastClient()
         { return clients.Last(); }
@@ -62,7 +59,8 @@ namespace Panther.Library.Services
         public Client? FindClient(int ID)
         { return clients.FirstOrDefault(c => c.Id == ID); }
 
-        private ClientService() 
+        // Adds Clients
+        private ClientService()
         {
             clients = new List<Client>();
             AddClient("Nick");
@@ -70,10 +68,9 @@ namespace Panther.Library.Services
             AddClient("Penelope");
         }
 
+        // Returns searched clients
         public List<Client> Search(string query)
-        {
-            return clients.Where(c => c.Name.ToUpper().Contains(query.ToUpper())).ToList();
-        }
+        { return clients.Where(c => c.Name.ToUpper().Contains(query.ToUpper())).ToList(); }
 
 
     }

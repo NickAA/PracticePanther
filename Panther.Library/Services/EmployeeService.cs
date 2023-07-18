@@ -40,28 +40,25 @@ namespace Panther.Library.Services
 
         public bool AddEmployee(string Name, double? Rate)
         {
-            if (Name != string.Empty)
+            // Makes sure Name and Rate aren't empty
+            if (!string.IsNullOrEmpty(Name) && Rate != null)
             {
-                employees.Add(new Employee());
-                employees.Last().Name = Name;
-                employees.Last().Rate = Rate;
+                employees.Add(new Employee(Name, Rate.Value));
                 return true;
             }
-
             return false;
         }
 
+        // Finds Employee with ID
         public Employee? FindEmployee(int ID)
         { return employees.FirstOrDefault(c => c.Id == ID); }
 
         public void RemoveEmployee (Employee employee)
         { employees.Remove(employee); }
 
-
+        // Returns searched employee list
         public List<Employee> Search(string query)
-        {
-            return employees.Where(c => c.Name.ToUpper().Contains(query.ToUpper())).ToList();
-        }
+        { return employees.Where(c => c.Name.ToUpper().Contains(query.ToUpper())).ToList(); }
 
     }
 }

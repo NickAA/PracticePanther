@@ -28,10 +28,9 @@ namespace Panther.Library.Services
 
         public bool AddProject(string Name)
         {
-            if (Name != string.Empty)
+            if (!string.IsNullOrEmpty(Name))
             {
-                projects.Add(new Project());
-                projects.Last().Name = Name;
+                projects.Add(new Project(Name));
                 return true;
             }
             return false;
@@ -40,27 +39,13 @@ namespace Panther.Library.Services
         public bool Exists(int Id)
         { return projects.Exists(c => c.Id == Id); }
 
-        public Project LastProject()
-        { return projects.Last(); }
-
-        public int Count()
-        { return projects.Count(); }
-
-        public void PrintProjects()
-        { projects.ForEach(Console.WriteLine); }
-
         public Project FindProject(int Id)
         { return projects.FirstOrDefault(c => c.Id == Id); }
-
-        public Project FindProject(string Name)
-        { return projects.FirstOrDefault(c => c.Name == Name); }
-
-        public int AmountofProjects()
-        { return projects.Count(); }
 
         public void RemoveProject(Project DeleteProject)
         { projects.Remove(DeleteProject); }
 
+        // Links Clients with project
         public void LinkClient(Project project, int Id)
         {
             var myClientService = ClientService.Current;
@@ -74,6 +59,7 @@ namespace Panther.Library.Services
             ProjectwithClient.Clients.Remove(client);
         }
 
+        // Adds Projects
         private ProjectService() 
         {
             AddProject("Azzi's Case");
@@ -82,6 +68,24 @@ namespace Panther.Library.Services
 
         public List<Project> Search(string query)
         { return projects.Where(c => c.Name.ToUpper().Contains(query.ToUpper())).ToList(); }
+
+
+        // Functions below used for assignment 1
+        public Project LastProject()
+        { return projects.Last(); }
+
+        public int Count()
+        { return projects.Count(); }
+
+        public void PrintProjects()
+        { projects.ForEach(Console.WriteLine); }
+
+        public Project FindProject(string Name)
+        { return projects.FirstOrDefault(c => c.Name == Name); }
+
+        public int AmountofProjects()
+        { return projects.Count(); }
+
 
     }
 }

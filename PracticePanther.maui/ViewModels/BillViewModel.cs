@@ -23,6 +23,7 @@ namespace PracticePanther.maui.ViewModels
             AvaliableProject = ProjectService.Current.projects;
         }
 
+        // Assigns needed values
         public BillViewModel(int BillId)
         {
             AvaliableProject = ProjectService.Current.projects;
@@ -80,9 +81,13 @@ namespace PracticePanther.maui.ViewModels
             }
         }
 
+        // Used for selecting/updating/viewing bill
         public Bill SelectedBill { get; set; }
+        // Used when updating/creating bill
         public Project SelectedProject { get; set; }
+        // To show list of projects to choose from
         public List<Project> AvaliableProject { get; set; }
+        // Cost of bill
         private double? ActualAmount { get; set; }
         public double? AmountInputted 
         { 
@@ -95,7 +100,7 @@ namespace PracticePanther.maui.ViewModels
         public DateTime? SelectedDate { get; set; }
 
 
-
+        // Prints into interface that a bill has been succesfully entered
         public string AddedBill { set; get; }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -35,12 +35,13 @@ namespace Panther.Library.Services
             }
         }
 
-        public bool AddTime (DateTime entry, int? hours, Project pId, Employee eId)
+        public bool AddTime (DateTime entry, int hours, Project pId, Employee eId)
         {
             times.Add(new Time(entry, hours, pId, eId));
             return true;
         }
 
+        // Returns back list of time entries with project name and employee name
         public List<Time> Search(string query)
         {
             List<Time> ContainTimes = new List<Time>();

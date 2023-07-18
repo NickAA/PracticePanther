@@ -10,8 +10,9 @@ namespace PracticePanther.Models
 {
     public class Project
     {
-        public Project ()
+        public Project (string InName)
         {
+            Name = InName;
             OpenDate = DateTime.Today;
             IsActive = true;
             Id = ++ProjectsCreated;
@@ -25,6 +26,7 @@ namespace PracticePanther.Models
 
         static private int ProjectsCreated = 0;
 
+        // Associated Clients
         public List<Client> Clients { get; set; }
         public string ClientName
         { get { return Clients?.Count == 0 ? "Not Assigned" : "Contains Clients"; } }
@@ -44,6 +46,7 @@ namespace PracticePanther.Models
         public override string ToString()
         { return $"{Name}"; }
 
+        // Bills for project
         public List<Bill> Bills { get; set; }
     }
 }

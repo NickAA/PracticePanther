@@ -9,7 +9,7 @@ namespace Panther.Library.Models
 {
     public class Bill
     {
-
+        // Assigns needed values
         public Bill(Project p, DateTime d, double ao)
         {
             ProjectAssociated = p;
@@ -26,8 +26,6 @@ namespace Panther.Library.Models
         public double AmountOwed { get; set; }
         public double AmountOwedRounded { get { return double.Round(AmountOwed, 2); } }
         public override string ToString ()
-        {
-            return $"{ProjectAssociated} owes ${AmountOwedRounded} due on {DueDateString}";
-        }
+        { return $"{ProjectAssociated} owes ${AmountOwedRounded} due on {DueDateString}"; }
     }
 }

@@ -30,11 +30,11 @@ namespace PracticePanther.maui.ViewModels
 
         public void Save ()
         {
-            if (SelectedEmployee.Name == string.Empty || SelectedEmployee.Rate == null)
+            if (string.IsNullOrEmpty(NewEmployee) || EmployeeRate == null)
                 return;
 
             SelectedEmployee.Name = NewEmployee;
-            SelectedEmployee.Rate = EmployeeRate;
+            SelectedEmployee.Rate = EmployeeRate.Value;
         }
 
         public ObservableCollection<Employee> Employees
@@ -58,6 +58,7 @@ namespace PracticePanther.maui.ViewModels
             // Works now
             NotifyPropertyChanged("Employees");
         }
+
         public Employee SelectedEmployee { get; set; }
 
         public void Add ()
@@ -74,14 +75,15 @@ namespace PracticePanther.maui.ViewModels
             NotifyPropertyChanged(nameof(NewEmployee));
             NotifyPropertyChanged(nameof(EmployeeRate));
         }
+        // Used for showing the name of new employee or updating name of existing employee
         public string NewEmployee { get; set; }
+        // Used for getting employee rate
         public double? EmployeeRate { get; set; }
+        // Shows prompt of added employee
         public string AddedEmployee { get; set; }
 
         public void Search()
-        {
-            NotifyPropertyChanged("Employees");
-        }
+        { NotifyPropertyChanged("Employees"); }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")

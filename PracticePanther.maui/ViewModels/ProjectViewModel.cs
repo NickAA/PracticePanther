@@ -43,6 +43,8 @@ namespace PracticePanther.maui.ViewModels
             
 
         }
+
+        // Shows clients
         public List<Client> AvaliableClients { get; set; }
         private string activity;
         public string Activity
@@ -61,18 +63,22 @@ namespace PracticePanther.maui.ViewModels
             }
         }
 
+        // Whether to gray out close date picker or not
         public bool IsEnabled { get; set; }
         public DateTime ProjectsOpenDate { get; set; }
         public string ProjectsOpenDateFormat { get { return ProjectsOpenDate.ToString("MM/dd/yyyy"); } }
         public DateTime? ProjectsCloseDate { get; set; }
         public string ProjectsCloseDateFormat { get { return SelectedProject.IsActive ? "N.A." : ProjectsCloseDate?.ToString("MM/dd/yyyy"); } }
         
-        // nvm just needed it to be empty
+        // Clients associated with Projects
         public ObservableCollection<Client> AssociatedClients { get; set; }
+        // Shows Project ID
         public int AssociatedID { get; set; }
+        // Prompt that shows what project is currently being updated
         public string UpdateTitle { get; set; }
-        public string Notes { get; set; }
+        // Entry name that's currently being updated
         public string ProjectToUpdateName { get; set; }
+        public string Notes { get; set; }
 
         public void Save ()
         {
@@ -128,6 +134,7 @@ namespace PracticePanther.maui.ViewModels
             }
         }
 
+        // Search
         public string Query { get; set; }
 
         public void Delete()
@@ -142,6 +149,7 @@ namespace PracticePanther.maui.ViewModels
             // Works now
             NotifyPropertyChanged("Projects");
         }
+        // Used for selected Project, updating project, and viewing a project
         public Project SelectedProject { get; set; }
 
         public void Add()
@@ -156,13 +164,13 @@ namespace PracticePanther.maui.ViewModels
             NewProject = string.Empty;
             NotifyPropertyChanged(nameof(NewProject));
         }
+        // Recieves string name
         public string NewProject { get; set; }
+        // Prompt: what project has been added
         public string AddedProject { get; set; }
 
         public void Search()
-        {
-            NotifyPropertyChanged("Projects");
-        }
+        { NotifyPropertyChanged("Projects"); }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")

@@ -10,8 +10,8 @@ namespace Panther.Library.Models
 {
     public class Time
     {
-
-        public Time (DateTime entry, int? hours, Project pId, Employee eId)
+        // Assigns needed values
+        public Time (DateTime entry, int hours, Project pId, Employee eId)
         {
             DateEntry = entry;
             Hours = hours;
@@ -27,9 +27,10 @@ namespace Panther.Library.Models
         public string DateDisplay { get {  return DateEntry.ToString("MM/dd/yyyy"); } }
         public string Narrative { get; set; }
 
-        public int? Hours { get; set; }
+        public int Hours { get; set; }
         public string HoursDisplay { get { return Hours.ToString(); } }
 
+        // Assigned Project and Employees
         public int ProjectId { get { return project.Id; } }
         public Project project { get; set; }
         public int EmployeeId { get { return employee.Id; } }

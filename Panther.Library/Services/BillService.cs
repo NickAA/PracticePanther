@@ -28,6 +28,7 @@ namespace Panther.Library.Services
             }
         }
 
+        // Finds bill w/ id
         public Bill Find(int id)
         { return bills.Find(b => b.ID == id); }
 
@@ -36,7 +37,7 @@ namespace Panther.Library.Services
             double a = 0;
             foreach (Time time in TimeService.Current.times)
                 if (p == time.project)
-                    a += time.employee.Rate.Value * time.Hours.Value;
+                    a += time.employee.Rate * time.Hours;
 
             if (a > 0)
             {
@@ -50,12 +51,14 @@ namespace Panther.Library.Services
 
         public void saveBill(Project p, DateTime d, double a, Bill BillChanging)
         {
+            // Removes all project associated w bill
             ProjectService.Current.FindProject(BillChanging.ProjectAssociated.Id).Bills.Remove(BillChanging);
 
             BillChanging.AmountOwed = a;
             BillChanging.ProjectAssociated = p;
             BillChanging.DueDate = d;
 
+            // Adds bills to projects
             ProjectService.Current.FindProject(BillChanging.ProjectAssociated.Id).Bills.Add(BillChanging);
         }
 
@@ -65,6 +68,7 @@ namespace Panther.Library.Services
             bills.Remove(b);
         }
 
+        // returns search bills w/ project name
         public List<Bill> Search (string Query)
         { return bills.Where(b => b.ProjectAssociated.Name.ToUpper().Contains(Query.ToUpper())).ToList(); }
 

@@ -36,16 +36,11 @@ namespace PracticePanther.maui.ViewModels
                 Activity = "InActive";
 
             SelectedProjects = new ObservableCollection<Project>();
-            //SelectedProjects = new ObservableCollection<Project>(SelectedClient.Project);
             AssociatedProjects = new ObservableCollection<Project>(SelectedClient.Project);
 
             BillsAssociated = new List<Bill>();
             foreach (Project p in AssociatedProjects)
                 BillsAssociated.AddRange(p.Bills);
-
-            
-            //NotifyPropertyChanged(nameof(SelectedProjects));
-            //NotifyPropertyChanged(nameof(ShowedProjects));
 
             UpdateTitle = $"Updating {SelectedClient.Name}";
             Notes = SelectedClient.Notes;
@@ -55,9 +50,11 @@ namespace PracticePanther.maui.ViewModels
 
         }
 
+        // Associated Bills for selected clients
         public List<Bill>BillsAssociated { get; set; }
 
-        public string ProjectNameDetail { get
+        public string ProjectNameDetail 
+        { get
             {
                 if (AssociatedProjects == null || AssociatedProjects.Count == 0)
                     return "No projects assigned.";
@@ -68,11 +65,13 @@ namespace PracticePanther.maui.ViewModels
                     ProjectMSG += $"{c.Name}, ";
 
                 return ProjectMSG.Remove(ProjectMSG.Count() - 2);
-            } }
+            } 
+        }
 
+        // Associated Projects for selected clients
         public ObservableCollection<Project> AssociatedProjects { get; set; }
 
-
+        // Selected projects to soon be associated with selected client
         private ObservableCollection<Project> selectedProjects;
         public ObservableCollection<Project> SelectedProjects
         { 
@@ -99,9 +98,10 @@ namespace PracticePanther.maui.ViewModels
         }
 
 
-
+        // Shows clients ID
         public int AssociatedID { get; set; }
 
+        // Shows list of projects
         public ObservableCollection<object> AvaliableProjects { get; set; }
 
         private string activity;
@@ -136,10 +136,11 @@ namespace PracticePanther.maui.ViewModels
             }
         }
 
+        // Used so that if true client cannot be deleted or activity is always true
         public bool CheckProjects { get; set; }
-
+        // Whether to gray out close date picker or not
         public bool IsEnabled { get; set; }
-
+        // Search
         public string Query { get; set; }
 
         public string Notes { get; set; }

@@ -48,13 +48,12 @@ namespace PracticePanther.maui.ViewModels
                 return new ObservableCollection<Time>(TimeService.Current.Search(Query));
             }
         }
-
+        
+        // Search
         public string Query { get; set; }
 
         public void Search()
-        {
-            NotifyPropertyChanged(nameof(Times));
-        }
+        { NotifyPropertyChanged(nameof(Times)); }
 
         public void Delete()
         {
@@ -65,6 +64,7 @@ namespace PracticePanther.maui.ViewModels
             NotifyPropertyChanged(nameof(Times));
         }
 
+        // Used to select time and grab time being updated
         public Time SelectedTime { get; set; }
 
         public void Add()
@@ -72,7 +72,7 @@ namespace PracticePanther.maui.ViewModels
             if (SelectedEmployee == null || SelectedProject == null || AddedHours == null)
                 return;
 
-            TimeService.Current.AddTime(Time, AddedHours, SelectedProject, SelectedEmployee);
+            TimeService.Current.AddTime(Time, AddedHours.Value, SelectedProject, SelectedEmployee);
 
             AddedTime = $"{SelectedEmployee} clocked {SelectedProject} for {AddedHours} hours";
             Time = DateTime.Today;
@@ -85,6 +85,7 @@ namespace PracticePanther.maui.ViewModels
             NotifyPropertyChanged(nameof(SelectedEmployee));
             NotifyPropertyChanged(nameof(SelectedProject));
         }
+        // Prompt shows what employee cloacked what project for how much hours
         public string AddedTime { get; set; }
         public DateTime Time { get; set; }
         public int? AddedHours { get; set; }
@@ -93,7 +94,7 @@ namespace PracticePanther.maui.ViewModels
 
         public void Save()
         {
-            SelectedTime.Hours = AddedHours;
+            SelectedTime.Hours = AddedHours.Value;
             SelectedTime.DateEntry = Time;
             SelectedTime.project = SelectedProject;
             SelectedTime.employee = SelectedEmployee;

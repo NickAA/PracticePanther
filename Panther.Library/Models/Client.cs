@@ -8,9 +8,10 @@ namespace PracticePanther.Models
 {
     public class Client
     {
-
-        public Client ()
+        // Assigns needed values
+        public Client (string InName)
         {
+            Name = InName;
             OpenDate = DateTime.Today;
             IsActive = true;
             Id = ++ClientsCreated;
@@ -18,6 +19,8 @@ namespace PracticePanther.Models
         }
 
         public int Id { get; set; }
+        public string IdDisplay
+        { get { return Id.ToString(); } }
         static private int ClientsCreated = 0;
 
         public List<Project>? Project { get; set; }
@@ -27,17 +30,15 @@ namespace PracticePanther.Models
         public DateTime? CloseDate { get; set; }
 
         public bool IsActive { get; set; }
+        public string ActiveDisplay
+        { get { return IsActive ? "Active" : "Inactive"; } }
 
         public string Name { get; set; }
         public string Notes { get; set; }
 
+        // When Client contains and project
         public string ProjectName
         { get { return Project?.Count == null || Project?.Count == 0 ? "Not Assigned" : "Contains Projects"; } }
-        public string ActiveDisplay
-        { get { return IsActive ? "Active" : "Inactive"; } }
-
-        public string IdDisplay
-        { get { return Id.ToString(); } }
 
         public override string ToString()
         { return $"{Name}"; }
