@@ -27,12 +27,9 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="4*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="4*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Entry Placeholder="Enter Bill" Keyboard="Numeric" Text="{Binding Path=AmountInputted, Mode=TwoWay}" Grid.Column="1"/>
-                <DatePicker Date="{Binding Path=SelectedDate, Mode=TwoWay}" Grid.Column="3"/>
+                <DatePicker Date="{Binding Path=SelectedDate, Mode=TwoWay}" Grid.Column="1"/>
             </Grid>
 
 

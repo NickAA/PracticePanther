@@ -52,8 +52,15 @@
                 <Label FontSize="Subtitle" Text="{Binding Path=Activity, StringFormat='This Project is: {0}'}"/>
             </Grid>
 
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
 
-            <Label FontSize="Subtitle" Text="{Binding Path=ClientNameDetail, StringFormat='Clients Associated with Project: {0}'}" Grid.Row="2"/>
+                <Label FontSize="Subtitle" Text="{Binding Path=ClientNameDetail, StringFormat='Clients Associated with Project: {0}'}" Grid.Column="0"/>
+                <ListView Grid.Column="1" ItemsSource="{Binding Path=SelectedProject.Bills}" SelectionMode="None"/>
+            </Grid>
 
             <Label Text="Notes" Grid.Row="3" FontSize="Subtitle"/>
             <Label Text="{Binding Path=Notes}" Grid.Row="3" Margin="0, 25, 0, -80"/>

@@ -1,4 +1,5 @@
-﻿using Panther.Library.Services;
+﻿using Panther.Library.Models;
+using Panther.Library.Services;
 using PracticePanther.Models;
 using System;
 using System.Collections.Generic;
@@ -37,6 +38,12 @@ namespace PracticePanther.maui.ViewModels
             SelectedProjects = new ObservableCollection<Project>();
             //SelectedProjects = new ObservableCollection<Project>(SelectedClient.Project);
             AssociatedProjects = new ObservableCollection<Project>(SelectedClient.Project);
+
+            BillsAssociated = new List<Bill>();
+            foreach (Project p in AssociatedProjects)
+                BillsAssociated.AddRange(p.Bills);
+
+            
             //NotifyPropertyChanged(nameof(SelectedProjects));
             //NotifyPropertyChanged(nameof(ShowedProjects));
 
@@ -47,6 +54,8 @@ namespace PracticePanther.maui.ViewModels
             ClientsCloseDate = SelectedClient.CloseDate;
 
         }
+
+        public List<Bill>BillsAssociated { get; set; }
 
         public string ProjectNameDetail { get
             {

@@ -56,16 +56,15 @@ namespace PracticePanther.maui.ViewModels
 
         public void Add()
         {
-            if (SelectedProject != null && SelectedDate != null && ActualAmount != 0 && ActualAmount != null)
+            if (SelectedProject != null && SelectedDate != null)
             {
-                BillService.Current.addBill(SelectedProject, SelectedDate.Value, ActualAmount.Value);
-                AddedBill = $"{SelectedProject} has been billed ${ActualAmount} due on {SelectedDate.Value.ToString("MM/dd/yyyy")}";
+                if (BillService.Current.addBill(SelectedProject, SelectedDate.Value))
+                    AddedBill = $"{SelectedProject} has been billed ${BillService.Current.bills.Last().AmountOwedRounded} due on {SelectedDate.Value.ToString("MM/dd/yyyy")}";
+
                 NotifyPropertyChanged(nameof(AddedBill));
                 SelectedProject = null;
-                ActualAmount = null;
                 SelectedDate = DateTime.Now;
                 NotifyPropertyChanged(nameof(SelectedProject));
-                NotifyPropertyChanged(nameof(AmountInputted));
                 NotifyPropertyChanged(nameof(SelectedDate));
             }
         }

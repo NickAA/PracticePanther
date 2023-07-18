@@ -14,11 +14,6 @@ namespace Panther.Library.Services
         private static BillService? Instance;
         private static object _lock = new object();
 
-        private BillService() 
-        {
-            addBill(ProjectService.Current.FindProject(1), DateTime.Today, 99.99);
-        }
-
         public static BillService Current
         {
             get
@@ -36,11 +31,21 @@ namespace Panther.Library.Services
         public Bill Find(int id)
         { return bills.Find(b => b.ID == id); }
 
-        public void addBill(Project p, DateTime d, double a)
+        public bool addBill(Project p, DateTime d)
         {
-            bills.Add(new Bill(p, d, a));
-            // Assigned recently created bill to project
-            ProjectService.Current.FindProject(p.Id).Bills.Add(bills.Last());
+            double a = 0;
+            foreach (Time time in TimeService.Current.times)
+                if (p == time.project)
+                    a += time.employee.Rate.Value * time.Hours.Value;
+
+            if (a > 0)
+            {
+                bills.Add(new Bill(p, d, a));
+                // Assigned recently created bill to project
+                ProjectService.Current.FindProject(p.Id).Bills.Add(bills.Last());
+                return true;
+            }
+            return false;
         }
 
         public void saveBill(Project p, DateTime d, double a, Bill BillChanging)

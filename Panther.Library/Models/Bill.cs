@@ -25,5 +25,9 @@ namespace Panther.Library.Models
         public string DueDateString { get {  return DueDate.ToString("MM/dd/yyyy"); } }
         public double AmountOwed { get; set; }
         public double AmountOwedRounded { get { return double.Round(AmountOwed, 2); } }
+        public override string ToString ()
+        {
+            return $"{ProjectAssociated} owes ${AmountOwedRounded} due on {DueDateString}";
+        }
     }
 }

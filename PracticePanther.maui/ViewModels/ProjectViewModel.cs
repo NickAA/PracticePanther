@@ -40,6 +40,7 @@ namespace PracticePanther.maui.ViewModels
 
             ProjectsOpenDate = SelectedProject.OpenDate;
             ProjectsCloseDate = SelectedProject.CloseDate;
+            
 
         }
         public List<Client> AvaliableClients { get; set; }
