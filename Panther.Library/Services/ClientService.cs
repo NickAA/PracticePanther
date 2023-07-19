@@ -1,4 +1,6 @@
-﻿using PracticePanther.Models;
+﻿using Newtonsoft.Json;
+using PracticePanther.Models;
+using PracticePanther.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +11,23 @@ namespace Panther.Library.Services
 {
     public class ClientService
     {
-        private List<Client> clients;
+        //private List<Client> clients;
         public List<Client> Clients
         {
-            get { return clients; }
+            get 
+            { 
+                var response = new WebRequestHandler()
+                    .Get("/Clients")
+                    .Result;
+                var clients = JsonConvert
+                    .DeserializeObject<List<Client>>(response);
+                return clients ?? new List<Client>();
+            }
+        }
+
+        private ClientService()
+        {
+
         }
 
         private static ClientService? instance;
@@ -35,42 +50,47 @@ namespace Panther.Library.Services
         {
             if (Name != string.Empty)
             {
-                clients.Add(new Client(Name));
+                var response = new WebRequestHandler().Post("/Clients/Add", Name).Result;
                 return true;
             }
 
             return false;
         }
 
-        public void RemoveClient(Client ClientToDelete)
-        { clients.Remove(ClientToDelete); }
+        public void RemoveClient(int ClientToDelete)
+        { var response = new WebRequestHandler().Delete($"/Clients/Delete/{ClientToDelete}"); }
 
         public Client LastClient()
-        { return clients.Last(); }
+        { return Clients.Last(); }
 
         public int AmountofClients()
-        { return clients.Count; }
+        { return Clients.Count; }
 
         public void PrintClients()
-        { clients.ForEach(Console.WriteLine); }
+        { Clients.ForEach(Console.WriteLine); }
 
         public bool ClientExist(int ID)
-        { return clients.Exists(c => c.Id == ID); }
+        { return FindClient(ID) == null ? false : true ; }
         public Client? FindClient(int ID)
-        { return clients.FirstOrDefault(c => c.Id == ID); }
+        {
+            var response = new WebRequestHandler()
+                .Get($"/Clients/{ID}")
+                .Result;
+            return JsonConvert.DeserializeObject<Client>(response);
+        }
 
         // Adds Clients
-        private ClientService()
-        {
-            clients = new List<Client>();
-            AddClient("Nick");
-            AddClient("Andrew");
-            AddClient("Penelope");
-        }
+        //private ClientService()
+        //{
+        //    //clients = new List<Client>();
+        //    //AddClient("Nick");
+        //    //AddClient("Andrew");
+        //    //AddClient("Penelope");
+        //}
 
         // Returns searched clients
         public List<Client> Search(string query)
-        { return clients.Where(c => c.Name.ToUpper().Contains(query.ToUpper())).ToList(); }
+        { return Clients.Where(c => c.Name.ToUpper().Contains(query.ToUpper())).ToList(); }
 
 
     }

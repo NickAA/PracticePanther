@@ -171,8 +171,8 @@ namespace PracticePanther.maui.ViewModels
             if (string.IsNullOrEmpty(NewClient))
                 return;
 
-            ClientService.Current.AddClient(NewClient);
-            AddedClient = $"{NewClient} has been added";
+            if (ClientService.Current.AddClient(NewClient))
+                AddedClient = $"{NewClient} has been added";
             NotifyPropertyChanged(nameof(AddedClient));
 
             NewClient = string.Empty;
@@ -194,11 +194,12 @@ namespace PracticePanther.maui.ViewModels
             foreach (Project p in SelectedClient.Project)
                 p.Clients.Remove(SelectedClient);
 
-            ClientService.Current.RemoveClient(SelectedClient);
+            ClientService.Current.RemoveClient(SelectedClient.Id);
             // Works now
             NotifyPropertyChanged("Clients");
         }
 
+        // Have to rework save to make it be used by client service
         public void Save()
         {
             SelectedClient.Name = ClientToUpdateName;
