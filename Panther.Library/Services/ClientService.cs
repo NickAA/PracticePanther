@@ -50,7 +50,7 @@ namespace Panther.Library.Services
         {
             if (Name != string.Empty)
             {
-                var response = new WebRequestHandler().Post("/Clients/Add", Name).Result;
+                var response = new WebRequestHandler().Post($"/Clients/Add/{Name}", Name).Result;
                 return true;
             }
 
