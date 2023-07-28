@@ -17,5 +17,13 @@ namespace PracticePanther.API.EC
             FakeDatabase.clients[index] = client;
             return client;
         }
+
+        public Client Delete(int clientId)
+        {
+            Client clientToDelete = FakeDatabase.clients.FirstOrDefault(c => c.Id == clientId);
+            if (clientToDelete != null)
+                FakeDatabase.clients.Remove(clientToDelete);
+            return clientToDelete ?? new Client("ERROR");
+        }
     }
 }
