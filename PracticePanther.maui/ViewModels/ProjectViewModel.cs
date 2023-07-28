@@ -95,11 +95,12 @@ namespace PracticePanther.maui.ViewModels
             if (IsEnabled)
                 SelectedProject.CloseDate = ProjectsCloseDate;
 
-            foreach(Client c in SelectedProject.Clients)
-                c.Project.Remove(SelectedProject);
-            SelectedProject.Clients = AssociatedClients.ToList();
-            foreach (Client c in SelectedProject.Clients)
-                c.Project.Add(SelectedProject);
+            foreach(int id in SelectedProject.ClientIds)
+                ClientService.Current.Clients.FirstOrDefault(c => c.Id == id).Project.Remove(SelectedProject);
+            foreach(Client client in AssociatedClients)
+                SelectedProject.ClientIds.Add(client.Id);
+            foreach (int id in SelectedProject.ClientIds)
+                ClientService.Current.Clients.FirstOrDefault(c => c.Id == id).Project.Add(SelectedProject);
 
 
             SelectedProject.Notes = Notes;
@@ -109,14 +110,14 @@ namespace PracticePanther.maui.ViewModels
         {
             get
             {
-                if (SelectedProject.Clients == null || SelectedProject.Clients.Count == 0)
+                if (SelectedProject.ClientIds == null || SelectedProject.ClientIds.Count == 0)
                     return "No clients assigned.";
 
                 string NameOfProjects = string.Empty;
 
-                foreach (Client clients in SelectedProject.Clients.Distinct())
+                foreach (int ClientIds in SelectedProject.ClientIds.Distinct())
                 {
-                    NameOfProjects += clients.Name + ", ";
+                    NameOfProjects += ClientService.Current.Clients.FirstOrDefault(c => c.Id == ClientIds).Name + ", ";
                 }
 
                 return NameOfProjects.Remove(NameOfProjects.Count() - 2);
@@ -142,8 +143,8 @@ namespace PracticePanther.maui.ViewModels
             if (SelectedProject == null)
                 return;
 
-            foreach (Client c in SelectedProject.Clients)
-                c.Project.Remove(SelectedProject);
+            foreach (int cId in SelectedProject.ClientIds)
+                ClientService.Current.Clients.FirstOrDefault(c => c.Id == cId).Project.Remove(SelectedProject);
 
             ProjectService.Current.RemoveProject(SelectedProject);
             // Works now

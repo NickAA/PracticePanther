@@ -192,7 +192,7 @@ namespace PracticePanther.maui.ViewModels
                     return;
 
             foreach (Project p in SelectedClient.Project)
-                p.Clients.Remove(SelectedClient);
+                p.ClientIds.Remove(SelectedClient.Id);
 
             ClientService.Current.RemoveClient(SelectedClient.Id);
             // Works now
@@ -208,7 +208,7 @@ namespace PracticePanther.maui.ViewModels
 
             SelectedClient.OpenDate = ClientsOpenDate;
             if (IsEnabled)
-                SelectedClient.CloseDate = ClientsCloseDate;
+                SelectedClient.CloseDate = ClientsCloseDate.Value;
 
             if (SelectedProjects != null)
             {
@@ -217,12 +217,12 @@ namespace PracticePanther.maui.ViewModels
                 NotifyPropertyChanged(nameof(Activity));
 
                 foreach (Project p in SelectedClient.Project)
-                    p.Clients.Add(SelectedClient);
+                    p.ClientIds.Add(SelectedClient.Id);
             }
             else
             {
                 foreach (Project p in SelectedClient.Project)
-                    p.Clients.Remove(SelectedClient);
+                    p.ClientIds.Remove(SelectedClient.Id);
                 SelectedClient.Project.Clear();
             }
 
@@ -232,8 +232,9 @@ namespace PracticePanther.maui.ViewModels
                 SelectedClient.IsActive = false;
 
             NotifyPropertyChanged(nameof(CheckProjects));
-
             SelectedClient.Notes = Notes;
+
+            ClientService.Current.UpdateClient(SelectedClient);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -16,6 +16,9 @@ namespace PracticePanther.Models
             IsActive = true;
             Id = ++ClientsCreated;
             Project = new List<Project> ();
+
+            Notes = string.Empty;
+            CloseDate = DateTime.Today;
         }
 
         public int Id { get; set; }
@@ -23,11 +26,11 @@ namespace PracticePanther.Models
         { get { return Id.ToString(); } }
         static private int ClientsCreated = 0;
 
-        public List<Project>? Project { get; set; }
+        public List<Project> Project { get; set; }
 
         public DateTime OpenDate { get; set; }
         public string OpeningDate { get { return OpenDate.ToString("MM/dd/yyyy"); } }
-        public DateTime? CloseDate { get; set; }
+        public DateTime CloseDate { get; set; }
 
         public bool IsActive { get; set; }
         public string ActiveDisplay

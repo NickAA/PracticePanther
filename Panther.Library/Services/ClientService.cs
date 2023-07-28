@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Panther.Library.Services
 {
@@ -58,8 +59,10 @@ namespace Panther.Library.Services
         }
 
         public void RemoveClient(int ClientToDelete)
-        { var response = new WebRequestHandler().Delete($"/Clients/Delete/{ClientToDelete}"); }
+        { var response = new WebRequestHandler().Delete($"/Clients/Delete/{ClientToDelete}").Result; }
 
+        public void UpdateClient(Client client)
+        { var response = new WebRequestHandler().Post($"/Clients/Update", client).Result; }
         public Client LastClient()
         { return Clients.Last(); }
 

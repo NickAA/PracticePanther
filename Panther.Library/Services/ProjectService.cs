@@ -50,13 +50,13 @@ namespace Panther.Library.Services
         {
             var myClientService = ClientService.Current;
             var Client = myClientService.FindClient(Id);
-            project.Clients.Add(Client);
+            project.ClientIds.Add(Client.Id);
         }
 
         public void RemoveClient(Client client)
         {
-            var ProjectwithClient = projects.FirstOrDefault(c => c.Clients.FirstOrDefault(s => s.Id == client.Id) == client);
-            ProjectwithClient.Clients.Remove(client);
+            var ProjectwithClient = projects.FirstOrDefault(c => c.ClientIds.Contains(client.Id));
+            ProjectwithClient.ClientIds.Remove(client.Id);
         }
 
         // Adds Projects

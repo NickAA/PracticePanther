@@ -16,8 +16,9 @@ namespace PracticePanther.Models
             OpenDate = DateTime.Today;
             IsActive = true;
             Id = ++ProjectsCreated;
-            Clients = new List<Client>();
+            ClientIds = new List<int>();
             Bills = new List<Bill>();
+            Notes = string.Empty;
         }
 
         public int Id { get; set; }
@@ -27,9 +28,9 @@ namespace PracticePanther.Models
         static private int ProjectsCreated = 0;
 
         // Associated Clients
-        public List<Client> Clients { get; set; }
+        public List<int> ClientIds { get; set; }
         public string ClientName
-        { get { return Clients?.Count == 0 ? "Not Assigned" : "Contains Clients"; } }
+        { get { return ClientIds?.Count == 0 ? "Not Assigned" : "Contains Clients"; } }
 
         public DateTime OpenDate { get; set; }
         public string OpeningDate
