@@ -210,7 +210,7 @@ namespace PracticePanther.maui.ViewModels
             if (IsEnabled)
                 SelectedClient.CloseDate = ClientsCloseDate.Value;
 
-            if (SelectedProjects != null)
+            if (SelectedProjects != null && SelectedProjects.Count != 0)
             {
                 SelectedClient.Project = SelectedProjects.ToList();
                 Activity = "Active";
@@ -221,6 +221,7 @@ namespace PracticePanther.maui.ViewModels
             }
             else
             {
+                Activity = "InActive";
                 foreach (Project p in SelectedClient.Project)
                     p.ClientIds.Remove(SelectedClient.Id);
                 SelectedClient.Project.Clear();

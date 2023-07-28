@@ -10,6 +10,14 @@ namespace PracticePanther.Models
 {
     public class Project
     {
+        public Project ()
+        {
+            Name = string.Empty;
+            Notes = string.Empty;
+            ClientIds = new List<int>();
+            Bills = new List<Bill>();
+        }
+
         public Project (string InName)
         {
             Name = InName;
@@ -18,6 +26,8 @@ namespace PracticePanther.Models
             Id = ++ProjectsCreated;
             ClientIds = new List<int>();
             Bills = new List<Bill>();
+
+            CloseDate = DateTime.Today;
             Notes = string.Empty;
         }
 
@@ -35,7 +45,7 @@ namespace PracticePanther.Models
         public DateTime OpenDate { get; set; }
         public string OpeningDate
         { get { return OpenDate.ToString("MM/dd/yyyy"); } }
-        public DateTime? CloseDate { get; set; }
+        public DateTime CloseDate { get; set; }
 
         public bool IsActive { get; set; }
         public string ActiveDisplay

@@ -9,6 +9,13 @@ namespace PracticePanther.Models
     public class Client
     {
         // Assigns needed values
+        public Client ()
+        {
+            Name = string.Empty;
+            Notes = string.Empty;
+            Project = new List<Project> ();
+        }
+
         public Client (string InName)
         {
             Name = InName;

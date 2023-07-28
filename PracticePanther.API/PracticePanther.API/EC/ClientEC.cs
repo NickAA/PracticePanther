@@ -13,9 +13,9 @@ namespace PracticePanther.API.EC
 
         public Client Update(Client client)
         {
-            var ClientToUpdate = FakeDatabase.clients.Find(c => c.Id == client.Id);
-            ClientToUpdate = client;
-            return ClientToUpdate;
+            int index = FakeDatabase.clients.FindIndex(c => c.Id == client.Id);
+            FakeDatabase.clients[index] = client;
+            return client;
         }
     }
 }

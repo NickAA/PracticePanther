@@ -93,7 +93,7 @@ namespace PracticePanther.maui.ViewModels
 
             SelectedProject.OpenDate = ProjectsOpenDate;
             if (IsEnabled)
-                SelectedProject.CloseDate = ProjectsCloseDate;
+                SelectedProject.CloseDate = ProjectsCloseDate.Value;
 
             foreach(int id in SelectedProject.ClientIds)
                 ClientService.Current.Clients.FirstOrDefault(c => c.Id == id).Project.Remove(SelectedProject);

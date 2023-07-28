@@ -38,11 +38,9 @@ namespace PracticePanther.API.Controllers
         }
 
         [HttpPost("Update")]
-        public Client Update([FromBody]object client)
+        public Client Update([FromBody]Client client)
         {
-            var test = JsonConvert.SerializeObject(new Client("test"));
-            return new Client("test");
-            //return new ClientEC().Update(client);
+            return new ClientEC().Update(client);
         }
 
         private readonly ILogger<ClientsController> _logger;
