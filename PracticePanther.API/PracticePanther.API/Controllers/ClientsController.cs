@@ -26,10 +26,6 @@ namespace PracticePanther.API.Controllers
         public Client? Delete(int id)
         {
             return new ClientEC().Delete(id);
-            Client clientToDelete = FakeDatabase.clients.FirstOrDefault(c => c.Id == id);
-            if (clientToDelete != null)
-                FakeDatabase.clients.Remove(clientToDelete);
-            return clientToDelete;
         }
 
         [HttpPost("Add/{clientsName}")]
