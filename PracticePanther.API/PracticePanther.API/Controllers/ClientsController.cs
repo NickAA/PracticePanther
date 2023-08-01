@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PracticePanther.API.Database;
 using PracticePanther.API.EC;
 using PracticePanther.Models;
-using Newtonsoft.Json;
 
 
 namespace PracticePanther.API.Controllers
@@ -14,12 +12,12 @@ namespace PracticePanther.API.Controllers
     {
         [HttpGet]
         public IEnumerable<Client> Get()
-        { return FakeDatabase.clients; }
+        { return new ClientEC().GetClients(); }
 
         [HttpGet("{id}")]
         public Client GetId(int id)
         {
-            return FakeDatabase.clients.FirstOrDefault(c => c.Id == id);
+            return new ClientEC().GetClient(id);
         }
 
         [HttpDelete("Delete/{id}")]

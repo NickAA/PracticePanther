@@ -5,6 +5,14 @@ namespace PracticePanther.API.EC
 {
     public class ClientEC
     {
+        public Client GetClient(int Id)
+        {
+            return FakeDatabase.clients.FirstOrDefault(c => c.Id == Id);
+        }
+
+        public IEnumerable<Client> GetClients()
+        { return FakeDatabase.clients; }
+
         public Client Add (string name)
         { 
             FakeDatabase.clients.Add(new Client(name));
