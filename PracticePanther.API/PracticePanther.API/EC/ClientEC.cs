@@ -1,37 +1,38 @@
-﻿using PracticePanther.API.Database;
+﻿using Panther.Library.DTO;
+using PracticePanther.API.Database;
 using PracticePanther.Models;
 
 namespace PracticePanther.API.EC
 {
     public class ClientEC
     {
-        public Client GetClient(int Id)
+        public ClientDTO GetClient(int Id)
         {
-            return FakeDatabase.clients.FirstOrDefault(c => c.Id == Id);
+            return new ClientDTO(FakeDatabase.clients.FirstOrDefault(c => c.Id == Id));
         }
 
-        public IEnumerable<Client> GetClients()
-        { return FakeDatabase.clients; }
+        public IEnumerable<ClientDTO> GetClients()
+        { return FakeDatabase.clients.Select(c => new ClientDTO(c)); }
 
-        public Client Add (string name)
+        public ClientDTO Add (string name)
         { 
             FakeDatabase.clients.Add(new Client(name));
-            return FakeDatabase.clients.Last();
+            return new ClientDTO(FakeDatabase.clients.Last());
         }
 
-        public Client Update(Client client)
+        public ClientDTO Update(ClientDTO clientDTO)
         {
-            int index = FakeDatabase.clients.FindIndex(c => c.Id == client.Id);
-            FakeDatabase.clients[index] = client;
-            return client;
+            int index = FakeDatabase.clients.FindIndex(c => c.Id == clientDTO.Id);
+            FakeDatabase.clients[index] = new Client(clientDTO);
+            return clientDTO;
         }
 
-        public Client Delete(int clientId)
+        public ClientDTO? Delete(int clientId)
         {
             Client clientToDelete = FakeDatabase.clients.FirstOrDefault(c => c.Id == clientId);
             if (clientToDelete != null)
                 FakeDatabase.clients.Remove(clientToDelete);
-            return clientToDelete ?? new Client("ERROR");
+            return clientToDelete != null ? new ClientDTO(clientToDelete) : null;
         }
     }
 }

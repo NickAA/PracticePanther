@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Panther.Library.DTO;
 using PracticePanther.API.EC;
-using PracticePanther.Models;
 
 
 namespace PracticePanther.API.Controllers
@@ -11,31 +11,31 @@ namespace PracticePanther.API.Controllers
     public class ClientsController : ControllerBase
     {
         [HttpGet]
-        public IEnumerable<Client> Get()
+        public IEnumerable<ClientDTO> Get()
         { return new ClientEC().GetClients(); }
 
         [HttpGet("{id}")]
-        public Client GetId(int id)
+        public ClientDTO GetId(int id)
         {
             return new ClientEC().GetClient(id);
         }
 
         [HttpDelete("Delete/{id}")]
-        public Client? Delete(int id)
+        public ClientDTO? Delete(int id)
         {
             return new ClientEC().Delete(id);
         }
 
         [HttpPost("Add/{clientsName}")]
-        public Client Add ([FromBody]string clientsName)
+        public ClientDTO Add ([FromBody]string clientsName)
         {
             return new ClientEC().Add(clientsName);
         }
 
         [HttpPost("Update")]
-        public Client Update([FromBody]Client client)
+        public ClientDTO Update([FromBody]ClientDTO clientDTO)
         {
-            return new ClientEC().Update(client);
+            return new ClientEC().Update(clientDTO);
         }
 
         private readonly ILogger<ClientsController> _logger;

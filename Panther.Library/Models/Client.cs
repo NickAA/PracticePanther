@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Panther.Library.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,17 @@ namespace PracticePanther.Models
             Name = string.Empty;
             Notes = string.Empty;
             Project = new List<Project> ();
+        }
+
+        public Client (ClientDTO c)
+        {
+            Id = c.Id;
+            Name = c.Name;
+            Notes = c.Notes;
+            OpenDate = c.OpenDate;
+            CloseDate = c.CloseDate;
+            IsActive = c.IsActive;
+            Project = new List<Project>(c.Project);
         }
 
         public Client (string InName)

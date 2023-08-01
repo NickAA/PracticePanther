@@ -1,4 +1,5 @@
-﻿using Panther.Library.Models;
+﻿using Panther.Library.DTO;
+using Panther.Library.Models;
 using Panther.Library.Services;
 using PracticePanther.Models;
 using System;
@@ -25,7 +26,7 @@ namespace PracticePanther.maui.ViewModels
         public ClientViewModel(int ClientsId)
         {
             AssociatedID = ClientsId;
-            SelectedClient = ClientService.Current.FindClient(ClientsId);
+            SelectedClient = new Client(ClientService.Current.FindClient(ClientsId));
             AvaliableProjects = new ObservableCollection<object>(ProjectService.Current.projects);
 
             ClientToUpdateName = SelectedClient.Name;
@@ -91,9 +92,9 @@ namespace PracticePanther.maui.ViewModels
             get 
             {
                 if (string.IsNullOrEmpty(Query))
-                    return new ObservableCollection<Client>(ClientService.Current.Clients);
+                    return new ObservableCollection<Client>(ClientService.Current.Clients.Select(c => new Client(c)));
 
-                return new ObservableCollection<Client>(ClientService.Current.Search(Query));
+                return new ObservableCollection<Client>(ClientService.Current.Search(Query).Select(c => new Client(c)));
             }
         }
 
@@ -235,7 +236,7 @@ namespace PracticePanther.maui.ViewModels
             NotifyPropertyChanged(nameof(CheckProjects));
             SelectedClient.Notes = Notes;
 
-            ClientService.Current.UpdateClient(SelectedClient);
+            ClientService.Current.UpdateClient(new ClientDTO(SelectedClient));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

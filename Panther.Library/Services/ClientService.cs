@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Panther.Library.DTO;
 using PracticePanther.Models;
 using PracticePanther.Utilities;
 using System;
@@ -13,7 +14,7 @@ namespace Panther.Library.Services
     public class ClientService
     {
         //private List<Client> clients;
-        public List<Client> Clients
+        public List<ClientDTO> Clients
         {
             get 
             { 
@@ -21,8 +22,8 @@ namespace Panther.Library.Services
                     .Get("/Clients")
                     .Result;
                 var clients = JsonConvert
-                    .DeserializeObject<List<Client>>(response);
-                return clients ?? new List<Client>();
+                    .DeserializeObject<List<ClientDTO>>(response);
+                return clients ?? new List<ClientDTO>();
             }
         }
 
@@ -61,9 +62,9 @@ namespace Panther.Library.Services
         public void RemoveClient(int ClientToDelete)
         { var response = new WebRequestHandler().Delete($"/Clients/Delete/{ClientToDelete}").Result; }
 
-        public void UpdateClient(Client client)
+        public void UpdateClient(ClientDTO client)
         { var response = new WebRequestHandler().Post($"/Clients/Update", client).Result; }
-        public Client LastClient()
+        public ClientDTO LastClient()
         { return Clients.Last(); }
 
         public int AmountofClients()
@@ -74,25 +75,16 @@ namespace Panther.Library.Services
 
         public bool ClientExist(int ID)
         { return FindClient(ID) == null ? false : true ; }
-        public Client? FindClient(int ID)
+        public ClientDTO? FindClient(int ID)
         {
             var response = new WebRequestHandler()
                 .Get($"/Clients/{ID}")
                 .Result;
-            return JsonConvert.DeserializeObject<Client>(response);
+            return JsonConvert.DeserializeObject<ClientDTO>(response);
         }
 
-        // Adds Clients
-        //private ClientService()
-        //{
-        //    //clients = new List<Client>();
-        //    //AddClient("Nick");
-        //    //AddClient("Andrew");
-        //    //AddClient("Penelope");
-        //}
-
         // Returns searched clients
-        public List<Client> Search(string query)
+        public List<ClientDTO> Search(string query)
         { return Clients.Where(c => c.Name.ToUpper().Contains(query.ToUpper())).ToList(); }
 
 

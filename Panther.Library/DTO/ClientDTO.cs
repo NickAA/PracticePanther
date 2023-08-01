@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Panther.Library.DTO
 {
-    internal class ClientDTO
+    public class ClientDTO
     {
         // Assigns needed values
         public ClientDTO()

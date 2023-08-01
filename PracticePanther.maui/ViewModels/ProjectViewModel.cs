@@ -24,7 +24,7 @@ namespace PracticePanther.maui.ViewModels
         {
             AssociatedID = InputtedProjectId;
             SelectedProject = ProjectService.Current.FindProject(InputtedProjectId);
-            AvaliableClients = ClientService.Current.Clients;
+            AvaliableClients = ClientService.Current.Clients.Select(c => new Client(c)).ToList();
 
             ProjectToUpdateName = SelectedProject.Name;
 

@@ -1,5 +1,4 @@
-﻿using Panther.Library.Services;
-using PracticePanther.Models;
+﻿using PracticePanther.Models;
 
 namespace PracticePanther.API.Database
 {
