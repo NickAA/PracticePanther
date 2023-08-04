@@ -39,27 +39,20 @@ namespace PracticePanther.API.Database
         public Client Add(Client c)
         {
             //set up a new Id if one doesn't already exist
-            if(c.Id <= 0)
-            {
-                c.Id = LastClientId + 1;
-            }
+            c.Id = LastClientId + 1;
 
             var path = $"{_clientRoot}\\{c.Id}.json";
 
             //if the item has been previously persisted
             if(File.Exists(path))
-            {
                 //blow it up
                 File.Delete(path);
-            }
 
             //write the file
-            File.WriteAllText(path, JsonConvert.SerializeObject(c));
+            //File.WriteAllText(path, JsonConvert.SerializeObject(c));
 
-            //using (var fw = new FileStream(path, FileMode.Create))
-            //{
-            //    fw.Write(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(c)));
-            //}
+            using (var fw = new FileStream(path, FileMode.Create))
+                fw.Write(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(c)));
 
                 //return the client, which now has an id
                 return c;
@@ -72,7 +65,9 @@ namespace PracticePanther.API.Database
             if(File.Exists(path))
             {
                 File.Delete(path);
-                File.WriteAllText(path, JsonConvert.SerializeObject(c));
+
+                using (var fw = new FileStream(path, FileMode.Create))
+                    fw.Write(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(c)));
             }
 
             return c;
