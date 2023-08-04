@@ -8,30 +8,28 @@ namespace PracticePanther.API.EC
     {
         public ClientDTO GetClient(int Id)
         {
-            return new ClientDTO(FakeDatabase.clients.FirstOrDefault(c => c.Id == Id));
+            return new ClientDTO(Filebase.Current.Clients.FirstOrDefault(c => c.Id == Id));
         }
 
         public IEnumerable<ClientDTO> GetClients()
-        { return FakeDatabase.clients.Select(c => new ClientDTO(c)); }
+        { return Filebase.Current.Clients.Select(c => new ClientDTO(c)); }
 
         public ClientDTO Add (string name)
         { 
-            FakeDatabase.clients.Add(new Client(name));
-            return new ClientDTO(FakeDatabase.clients.Last());
+            Filebase.Current.Add(new Client(name));
+            return new ClientDTO(Filebase.Current.Clients.Last());
         }
 
         public ClientDTO Update(ClientDTO clientDTO)
         {
-            int index = FakeDatabase.clients.FindIndex(c => c.Id == clientDTO.Id);
-            FakeDatabase.clients[index] = new Client(clientDTO);
-            return clientDTO;
+            return new ClientDTO(Filebase.Current.Update(new Client(clientDTO)));
         }
 
         public ClientDTO? Delete(int clientId)
         {
-            Client clientToDelete = FakeDatabase.clients.FirstOrDefault(c => c.Id == clientId);
+            Client clientToDelete = Filebase.Current.Clients.FirstOrDefault(c => c.Id == clientId);
             if (clientToDelete != null)
-                FakeDatabase.clients.Remove(clientToDelete);
+                Filebase.Current.Delete(clientId);
             return clientToDelete != null ? new ClientDTO(clientToDelete) : null;
         }
     }
