@@ -1,13 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Panther.Library.DTO;
-using PracticePanther.Models;
 using PracticePanther.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace Panther.Library.Services
 {

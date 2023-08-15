@@ -1,10 +1,5 @@
 ﻿using Panther.Library.Models;
 using PracticePanther.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Panther.Library.Services
 {
@@ -71,6 +66,5 @@ namespace Panther.Library.Services
         // returns search bills w/ project name
         public List<Bill> Search (string Query)
         { return bills.Where(b => b.ProjectAssociated.Name.ToUpper().Contains(Query.ToUpper())).ToList(); }
-
     }
 }

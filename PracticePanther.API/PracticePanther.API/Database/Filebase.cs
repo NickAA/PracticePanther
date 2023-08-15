@@ -1,6 +1,4 @@
 ﻿using Newtonsoft.Json;
-using PracticePanther.API.Controllers;
-using PracticePanther.API.EC;
 using PracticePanther.Models;
 using System.Text;
 

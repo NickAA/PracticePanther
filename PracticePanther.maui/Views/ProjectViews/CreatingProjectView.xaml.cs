@@ -7,7 +7,6 @@ public partial class CreatingProjectView : ContentPage
     public CreatingProjectView()
     {
         InitializeComponent();
-
         BindingContext = new ProjectViewModel();
     }
 
